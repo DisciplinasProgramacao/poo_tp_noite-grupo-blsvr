@@ -1,3 +1,9 @@
 # Instruções de uso
 
-Coloque neste arquivo qualquer instrução que julgar pertinente para a execução correta do sistema: arquivos de configuração, arquivos de dados, possíveis dados de teste etc.
+Os seguintes arquivos servem para o cadastramento de audiência, espectadores e series respectivamente. O nome dos arquivos não devem ser alterados e devem manter-se na pasta "arquivos"
+
+POO_Audiencia.csv
+
+POO_Espectadores.csv
+
+POO_Series.csv
