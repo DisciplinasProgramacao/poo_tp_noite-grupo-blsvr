@@ -18,7 +18,7 @@ public class ListaSerie {
      * @return
      */
 
-    public List<Serie> buscar(String nome, String idioma, String genero) {
+    public List<Serie> Buscar(String nome, String idioma, String genero) {
 
         List<Serie> ListaRetorno = new ArrayList<Serie>();
 
