@@ -42,4 +42,16 @@ public class Streaming {
         }
     }
 
+    public void cadastrarVariosUsuarios(String CaminhoArquivo){
+
+    }
+
+    public void cadastrarVariasMidias(String CaminhoArquivo){
+
+    }
+
+    public void cadastrarAudiencia(String CaminhoArquivo){
+
+    }
+
 }
