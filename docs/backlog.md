@@ -1,8 +1,8 @@
 | Usuário      | Requisito | Motivação     |
 | :----:        |    :----:   |          :----: |
-| Como um Usuário, eu quero      | Guardar séries  | Lembrar de assistir depois    |
-| Como um Usuário, eu quero   | --Cadastrar vários usuários--         | Manter consistência do sistema      |
-| Como um XXXXXX, eu quero      | --requsito--       | para...    |
+| Como um Cliente, eu quero      | Guardar séries  |para... Lembrar de assistir depois    |
+| Como um Usuário, eu quero   | --Cadastrar vários clientes e midias--         | Manter consistência do sistema      |
+| Como um Usuário, eu quero      | --Cadastrar filmes e series--       | para... aumentar meu catálogo   |
 | Como um XXXXXX, eu quero      | --requsito--       | para...    |
 | Como um XXXXXX, eu quero      | --requsito--       | para...    |
 | Como um XXXXXX, eu quero      | --requsito--       | para...    |

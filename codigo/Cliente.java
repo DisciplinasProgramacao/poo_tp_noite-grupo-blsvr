@@ -1,27 +1,37 @@
-import java.util.Hashtable;
-
-
 public class Cliente {
     String nome, login, senha;
-    Hashtable <Serie, String> seriesAssistidas = new Hashtable<>();
-    Hashtable <Serie, String> seriesFuturas = new Hashtable<>();
+    ListaMidia MidiasAssistidas;
+    ListaMidia MidiasFuturas;
 
 
     private void init(String nome, String login, String senha){
         this.login = login;
         this.senha = senha;
+        this.nome = nome;
+        this.MidiasAssistidas = new ListaMidia();
+        this.MidiasFuturas = new ListaMidia();
     }
     
     public Cliente(String nome, String login, String senha){
         init(nome, login, senha);
     }
    
-  
-    public void assistir(Serie assistida){
-        seriesAssistidas.put(assistida, assistida.nome);
+  /**
+   * Adiciona a midia a lista das midias assistidas
+   * @param assistida Midia que foi assistida
+   */
+    public void assistir(Midia assistida){
+        MidiasAssistidas.AdicionarMidia(assistida);
+        assistida.AdicionarView();
+        MidiasFuturas.RemoverMidia(assistida);
     }
 
+
+    /**
+     * Adiciona a midia na lista das series planejadas para assistir
+     * @param planejada Mídia planejada para assistir
+     */
     public void planejarParaAssistir(Serie planejada){
-        seriesAssistidas.put(planejada, planejada.nome);
+        MidiasFuturas.AdicionarMidia(planejada);
     }
 }
