@@ -37,19 +37,38 @@ public class ListaMidia {
 
     /**
      * Adiciona da lista a midia passada como parâmetro
+     * 
      * @param Adicionada Mídia a ser adicionada
      */
     public void AdicionarMidia(Midia Adicionada) {
         this.listaDeMidias.add(Adicionada);
     }
 
-
     /**
      * Remove da lista a midia passada como parâmetro
+     * 
      * @param Adicionada Mídia a ser removida
      */
     public void RemoverMidia(Midia Adicionada) {
         this.listaDeMidias.remove(Adicionada);
+    }
+
+    /**
+     * Pesquisa se a Midia está contida dentro da Lista
+     * @param Pesquisada Midia que será pesquisada
+     * @return Retorna verdadeiro se a midia foi encontrada e falso caso a midia não foi encontrada
+     */
+    public boolean Contem(Midia Pesquisada) {
+
+        for (int i = 0; i < listaDeMidias.size(); i++) {
+
+            if (listaDeMidias.get(i).equals(Pesquisada)) {
+                return true;
+            }
+        }
+
+        return false;
+
     }
 
 }
