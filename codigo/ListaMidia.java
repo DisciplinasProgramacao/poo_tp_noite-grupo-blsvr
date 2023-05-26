@@ -10,15 +10,17 @@ public class ListaMidia {
 
     /**
      * Parâmetros vazios serão ignorados durante a busca. Esse método retorna uma
-     * lista de séries com todas as séries que contenham a busca.
+     * lista de mídia com todas as mídias que contenham a busca retornará uma lista
+     * vazia caso nada seja encontrado.
      * 
-     * @param nome   Nome do filme buscado.
-     * @param idioma Idioma do filme buscado.
-     * @param genero Gênero do filme buscado.
-     * @return
+     * @param nome   Nome da mídia buscado.
+     * @param idioma Idioma da mídia buscado.
+     * @param genero Gênero da mídia buscado.
+     * @param id     ID da mídia buscada.
+     * @return Retorna uma lista com as mídias encontradas.
      */
 
-    public List<Midia> Buscar(String nome, String idioma, String genero) {
+    public List<Midia> Buscar(String nome, String idioma, String genero, String id) {
 
         List<Midia> ListaRetorno = new ArrayList<Midia>();
 
@@ -27,8 +29,9 @@ public class ListaMidia {
             boolean nomeMatch = nome.isEmpty() || Midia.nome.contains(nome);
             boolean idiomaMatch = idioma.isEmpty() || Midia.idioma.contains(idioma);
             boolean generoMatch = genero.isEmpty() || Midia.genero.contains(genero);
+            boolean idmatch = id.isEmpty() || Midia.genero.contains(id);
 
-            if (nomeMatch && idiomaMatch && generoMatch) {
+            if (nomeMatch && idiomaMatch && generoMatch && idmatch) {
                 ListaRetorno.add(Midia);
             }
         }
@@ -55,8 +58,10 @@ public class ListaMidia {
 
     /**
      * Pesquisa se a Midia está contida dentro da Lista
+     * 
      * @param Pesquisada Midia que será pesquisada
-     * @return Retorna verdadeiro se a midia foi encontrada e falso caso a midia não foi encontrada
+     * @return Retorna verdadeiro se a midia foi encontrada e falso caso a midia não
+     *         foi encontrada
      */
     public boolean Contem(Midia Pesquisada) {
 

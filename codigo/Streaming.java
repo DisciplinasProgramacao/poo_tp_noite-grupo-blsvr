@@ -1,8 +1,11 @@
 import java.util.List;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class Streaming {
     List<Cliente> clientesCadastrados;
-    ListaMidia seriesCadastradas;
+    ListaMidia midiasCadastradas;
 
     public void incluirEspectadores() {
 
@@ -33,7 +36,7 @@ public class Streaming {
      * 
      * @param Login Login inserido pelo cliente a ser adicionado
      * @param Senha Senha inserida pelo cliente a ser adicionado
-     * @param Nome Nome inserido pelo cliente a ser adicionado
+     * @param Nome  Nome inserido pelo cliente a ser adicionado
      */
     public void cadastrar(String Login, String Senha, String Nome) {
         Cliente novoCliente = new Cliente(Senha, Login, Nome);
@@ -42,15 +45,95 @@ public class Streaming {
         }
     }
 
-    public void cadastrarVariosUsuarios(String CaminhoArquivo){
+    public void cadastrarVariosUsuarios(String CaminhoArquivo) {
+
+        String arquivoCSVEspectadores = "../arquivos/POO_Espectadores.csv";
+        String linha;
+        String separador = ";";
+        try (BufferedReader br = new BufferedReader(new FileReader(arquivoCSVEspectadores))) {
+            while ((linha = br.readLine()) != null) {
+                String[] dados = linha.split(separador);
+
+                // Ada A N Gaiman;Ada15;ABro14420
+
+                Cliente novoCliente = new Cliente(dados[0], dados[1], dados[2]);
+                clientesCadastrados.add(novoCliente);
+            }
+            br.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
-    public void cadastrarVariasMidias(String CaminhoArquivo){
+    public void cadastrarVariasMidias(String CaminhoArquivo) {
+
+        String arquivoCSVSerie = "../arquivos/POO_Series.csv";
+        String arquivoCSVFilme = "../arquivos/POO_Filmes.csv";
+        String linha;
+        String separador = ";";
+        try (BufferedReader br = new BufferedReader(new FileReader(arquivoCSVSerie))) {
+            while ((linha = br.readLine()) != null) {
+                String[] dados = linha.split(separador);
+                // 3489;Yellow County;14/09/2016
+
+                int ID = Integer.parseInt(dados[0]);
+                int DataLancamento = Integer.parseInt(dados[2]);
+                Serie novaSeria = new Serie(dados[1], "", "", DataLancamento, ID, 0, 0, 0, 0);
+                midiasCadastradas.AdicionarMidia(novaSeria);
+
+            }
+            br.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try (BufferedReader br = new BufferedReader(new FileReader(arquivoCSVFilme))) {
+            while ((linha = br.readLine()) != null) {
+                String[] dados = linha.split(separador);
+                // 9752;Defenders Of Our Future;17/12/2016;112
+
+                int ID = Integer.parseInt(dados[0]);
+                int DataLancamento = Integer.parseInt(dados[2]);
+                Filme novoFilme = new Filme("", "", "", DataLancamento, ID, 0, 0, 0, 0);
+                midiasCadastradas.AdicionarMidia(novoFilme);
+
+            }
+        } catch (IOException x) {
+            x.printStackTrace();
+        }
 
     }
 
-    public void cadastrarAudiencia(String CaminhoArquivo){
+    public void cadastrarAudiencia(String CaminhoArquivo) {
+
+        String arquivoCSV = "../arquivos/POO_Audiencia.csv";
+        String linha;
+        String separador = ";";
+        try (BufferedReader br = new BufferedReader(new FileReader(arquivoCSV))) {
+            while ((linha = br.readLine()) != null) {
+                String[] dados = linha.split(separador);
+
+                Midia midiaAchada = midiasCadastradas.Buscar("", "", "", dados[2]).get(0);
+                midiasCadastradas.RemoverMidia(midiaAchada);
+                midiaAchada.AdicionarView();
+                midiasCadastradas.AdicionarMidia(midiaAchada);
+
+                for (int i = 0; i < clientesCadastrados.size(); i++) {
+                    if (clientesCadastrados.get(i).login.equals(dados[0])) {
+                        if (dados[1].equals("F")) {
+                            clientesCadastrados.get(i).MidiasFuturas.AdicionarMidia(midiaAchada);
+                        } else {
+                            clientesCadastrados.get(i).MidiasAssistidas.AdicionarMidia(midiaAchada);
+
+                        }
+                    }
+                }
+
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
