@@ -1,15 +1,17 @@
-import javafx.scene.chart.PieChart.Data;
+import java.util.Date;
 
 abstract public class Midia {
 
     String nome;
     String idioma;
     String genero;
-    Data DataLancamento;
+    Date DataLancamento;
     int ID;
     int visualizacoes;
     int MediaAvaliacoes;
     int totalAvaliacoes;
+
+
 
     /**
      * Adiciona uma visualização a midia
