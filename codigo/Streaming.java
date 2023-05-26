@@ -2,14 +2,13 @@ import java.util.List;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Scanner;
 
 public class Streaming {
-    List<Cliente> clientesCadastrados;
-    ListaMidia midiasCadastradas;
+    private static List<Cliente> clientesCadastrados;
+    private static ListaMidia midiasCadastradas;
 
-    public void incluirEspectadores() {
-
-    }
+    
 
     /**
      * Verifica se o usuário inseriu sua senha e login corretamente
@@ -19,7 +18,7 @@ public class Streaming {
      * @return Retorna verdadeiro se o usuário foi encontrado ou falso se o usuário
      *         não foi encontrado
      */
-    public boolean entrar(String Senha, String Longin) {
+    public static boolean entrar(String Senha, String Longin) {
 
         for (int i = 0; i < clientesCadastrados.size(); i++) {
             if (clientesCadastrados.get(i).login.equals(Senha) && clientesCadastrados.get(i).senha.equals(Longin)) {
@@ -45,9 +44,9 @@ public class Streaming {
         }
     }
 
-    public void cadastrarVariosUsuarios(String CaminhoArquivo) {
+    public void cadastrarVariosUsuarios(String CaminhoArquivoEspectadores) {
 
-        String arquivoCSVEspectadores = "../arquivos/POO_Espectadores.csv";
+        String arquivoCSVEspectadores = CaminhoArquivoEspectadores;
         String linha;
         String separador = ";";
         try (BufferedReader br = new BufferedReader(new FileReader(arquivoCSVEspectadores))) {
