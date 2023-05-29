@@ -1,14 +1,20 @@
+import java.util.ArrayList;
 import java.util.List;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
 
 public class Streaming {
-    private static List<Cliente> clientesCadastrados;
-    private static ListaMidia midiasCadastradas;
+    private List<Cliente> clientesCadastrados;
+    private ListaMidia midiasCadastradas;
 
-    
+    public Streaming() {
+        this.clientesCadastrados = new ArrayList<Cliente>();
+        this.midiasCadastradas = new ListaMidia();
+    }
 
     /**
      * Verifica se o usuário inseriu sua senha e login corretamente
@@ -18,14 +24,16 @@ public class Streaming {
      * @return Retorna verdadeiro se o usuário foi encontrado ou falso se o usuário
      *         não foi encontrado
      */
-    public static boolean entrar(String Senha, String Longin) {
+    public boolean entrar(String Senha, String Login) {
 
         for (int i = 0; i < clientesCadastrados.size(); i++) {
-            if (clientesCadastrados.get(i).login.equals(Senha) && clientesCadastrados.get(i).senha.equals(Longin)) {
+            if (clientesCadastrados.get(i).login.equals(Login) && clientesCadastrados.get(i).senha.equals(Senha)) {
+                System.out.println("ENTROU");
+
                 return true;
             }
         }
-
+        System.out.println("N ENTROU");
         return false;
     }
 
@@ -44,44 +52,56 @@ public class Streaming {
         }
     }
 
+    // #region Cadastros vindo de arquivos
+
+    /**
+     * Cadastra diversos espectadores dentro da lista de clientes cadastrados.
+     * 
+     * @param CaminhoArquivoEspectadores Caminho no qual o arquivo .csv para leitura
+     *                                   está salvo
+     */
     public void cadastrarVariosUsuarios(String CaminhoArquivoEspectadores) {
 
-        String arquivoCSVEspectadores = CaminhoArquivoEspectadores;
-        String linha;
-        String separador = ";";
-        try (BufferedReader br = new BufferedReader(new FileReader(arquivoCSVEspectadores))) {
-            while ((linha = br.readLine()) != null) {
-                String[] dados = linha.split(separador);
+        try {
+            // Ada A N Gaiman;Ada15;ABro14420
 
-                // Ada A N Gaiman;Ada15;ABro14420
+            File arquivo = new File(CaminhoArquivoEspectadores);
+            Scanner ler1 = new Scanner(arquivo);
 
+            while (ler1.hasNextLine()) {
+                String[] dados = ler1.nextLine().split(";");
                 Cliente novoCliente = new Cliente(dados[0], dados[1], dados[2]);
                 clientesCadastrados.add(novoCliente);
             }
-            br.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+            ler1.close();
+        } catch (FileNotFoundException x) {
+            System.out.println("File not found");
         }
 
     }
 
-    public void cadastrarVariasMidias(String CaminhoArquivo) {
+    /**
+     * Cadastra diversas mídias dentro da lista de mídias cadastradas.
+     * 
+     * @param CaminhoArquivo
+     */
+    public void cadastrarVariasMidias(String CaminhoArquivoSeries, String CaminhoFilmes) {
 
-        String arquivoCSVSerie = "../arquivos/POO_Series.csv";
-        String arquivoCSVFilme = "../arquivos/POO_Filmes.csv";
+        String arquivoCSVSerie = CaminhoArquivoSeries;
+        String arquivoCSVFilme = CaminhoFilmes;
         String linha;
         String separador = ";";
         try (BufferedReader br = new BufferedReader(new FileReader(arquivoCSVSerie))) {
             while ((linha = br.readLine()) != null) {
                 String[] dados = linha.split(separador);
                 // 3489;Yellow County;14/09/2016
-
+                System.out.println(dados[0]);
                 int ID = Integer.parseInt(dados[0]);
                 int DataLancamento = Integer.parseInt(dados[2]);
                 Serie novaSeria = new Serie(dados[1], "", "", DataLancamento, ID, 0, 0, 0, 0);
                 midiasCadastradas.AdicionarMidia(novaSeria);
-
             }
+
             br.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -104,9 +124,17 @@ public class Streaming {
 
     }
 
+    /**
+     * Cadastra audiência cadastrando a visualização da mídia apenas se a mídia já
+     * tiver sido assistida pelo usuário além de adicionar a mídia para o respectivo
+     * espectador.
+     * 
+     * @param CaminhoArquivo
+     */
+
     public void cadastrarAudiencia(String CaminhoArquivo) {
 
-        String arquivoCSV = "../arquivos/POO_Audiencia.csv";
+        String arquivoCSV = CaminhoArquivo;
         String linha;
         String separador = ";";
         try (BufferedReader br = new BufferedReader(new FileReader(arquivoCSV))) {
@@ -135,5 +163,7 @@ public class Streaming {
         }
 
     }
+
+    // #endregion
 
 }

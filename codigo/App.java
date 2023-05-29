@@ -1,17 +1,20 @@
 import java.util.Scanner;
+
 public class App {
     public static void main(String[] args) {
+
         Streaming sesao = new Streaming();
-        
-        sesao.cadastrarVariasMidias(null);
-        sesao.cadastrarVariosUsuarios(null);
-        sesao.cadastrarAudiencia(null);
+
+        sesao.cadastrarVariosUsuarios("arquivos/POO_Espectadores.csv");
+        sesao.cadastrarVariasMidias("arquivos/POO_Series.csv", "arquivos/POO_Filmes.csv");
+        sesao.cadastrarAudiencia("arquivos/POO_Audiencia.csv");
 
         Scanner ler1 = new Scanner(System.in);
         int escolha;
         String login = "";
         String senha = "";
-        do {
+        boolean Verificado = false;
+        while (!Verificado) {
             System.out.println("Você deseja:");
             System.out.println("1: Entrar na conta");
             System.out.println("2: Criar uma conta");
@@ -24,26 +27,23 @@ public class App {
                     login = ler1.next();
                     System.out.println("Digite sua senha");
                     senha = ler1.next();
-
+                    Verificado = sesao.entrar(senha, login);
                     break;
 
                 default:
                     break;
 
             }
-        } while (sesao.entrar(senha, login));
+        }
 
         boolean sair = false;
         while (!sair) {
 
             System.out.println("BEM-VINDO");
+            System.out.println("ESCOLHA SUA AÇÃO:");
 
         }
 
         ler1.close();
-    }
-
-    public void incluirEspectadores() {
-
     }
 }

@@ -11,8 +11,6 @@ abstract public class Midia {
     int MediaAvaliacoes;
     int totalAvaliacoes;
 
-
-
     /**
      * Adiciona uma visualização a midia
      */
