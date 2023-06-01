@@ -32,14 +32,14 @@ public class Cliente {
      * @param planejada Mídia planejada para assistir
      */
     public void planejarParaAssistir(Serie planejada) {
-        MidiasFuturas.AdicionarMidia(planejada);
+        if (!MidiasFuturas.Contem(planejada))
+            MidiasFuturas.AdicionarMidia(planejada);
     }
 
     public void Avaliar(Midia Avaliar, int Nota) {
         if (MidiasAssistidas.Contem(Avaliar)) {
-
-            Avaliar.Avaliar(Nota);
-
+            Avaliacao novaAvaliacao = new Avaliacao(Nota);
+            Avaliar.Avaliacoes.add(novaAvaliacao);
         }
     }
 }

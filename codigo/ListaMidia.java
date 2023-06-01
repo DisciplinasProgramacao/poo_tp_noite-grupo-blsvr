@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -6,6 +7,11 @@ public class ListaMidia {
 
     public ListaMidia() {
         listaDeMidias = new ArrayList<Midia>();
+    }
+
+    public void imprimirLista() {
+        System.out.println(listaDeMidias.size());
+        listaDeMidias.stream().forEach(Midia -> System.out.println(Midia.ID));
     }
 
     /**
@@ -17,22 +23,22 @@ public class ListaMidia {
      * @param idioma Idioma da mídia buscado.
      * @param genero Gênero da mídia buscado.
      * @param id     ID da mídia buscada.
-     * @return Retorna uma lista com as mídias encontradas.
+     * @return Retorna uma lista com as mídias encontradas. Retornando nulo caso não
+     *         sejam encontradas nenhuma mídia com os parâmetros passados
      */
 
     public List<Midia> Buscar(String nome, String idioma, String genero, String id) {
 
         List<Midia> ListaRetorno = new ArrayList<Midia>();
-
-        for (Midia Midia : listaDeMidias) {
-
-            boolean nomeMatch = nome.isEmpty() || Midia.nome.contains(nome);
-            boolean idiomaMatch = idioma.isEmpty() || Midia.idioma.contains(idioma);
-            boolean generoMatch = genero.isEmpty() || Midia.genero.contains(genero);
-            boolean idmatch = id.isEmpty() || Midia.genero.contains(id);
-
+        
+        for (Midia analisada : listaDeMidias) {
+            boolean nomeMatch = nome.isEmpty() || analisada.nome.contains(nome);
+            boolean idiomaMatch = idioma.isEmpty() || analisada.idioma.contains(idioma);
+            boolean generoMatch = genero.isEmpty() || analisada.genero.contains(genero);
+            boolean idmatch = id.isEmpty() || analisada.ID.equals(id);
             if (nomeMatch && idiomaMatch && generoMatch && idmatch) {
-                ListaRetorno.add(Midia);
+
+                ListaRetorno.add(analisada);
             }
         }
         return ListaRetorno;

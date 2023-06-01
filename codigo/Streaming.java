@@ -95,10 +95,7 @@ public class Streaming {
             while ((linha = br.readLine()) != null) {
                 String[] dados = linha.split(separador);
                 // 3489;Yellow County;14/09/2016
-                System.out.println(dados[0]);
-                int ID = Integer.parseInt(dados[0]);
-                int DataLancamento = Integer.parseInt(dados[2]);
-                Serie novaSeria = new Serie(dados[1], "", "", DataLancamento, ID, 0, 0, 0, 0);
+                Serie novaSeria = new Serie(dados[1], "", "", dados[2], dados[0], 0, 0);
                 midiasCadastradas.AdicionarMidia(novaSeria);
             }
 
@@ -111,10 +108,7 @@ public class Streaming {
             while ((linha = br.readLine()) != null) {
                 String[] dados = linha.split(separador);
                 // 9752;Defenders Of Our Future;17/12/2016;112
-
-                int ID = Integer.parseInt(dados[0]);
-                int DataLancamento = Integer.parseInt(dados[2]);
-                Filme novoFilme = new Filme("", "", "", DataLancamento, ID, 0, 0, 0, 0);
+                Filme novoFilme = new Filme(dados[1], "", "", dados[2], dados[0], 0, dados[3]);
                 midiasCadastradas.AdicionarMidia(novoFilme);
 
             }
@@ -140,23 +134,25 @@ public class Streaming {
         try (BufferedReader br = new BufferedReader(new FileReader(arquivoCSV))) {
             while ((linha = br.readLine()) != null) {
                 String[] dados = linha.split(separador);
+                // Nei144706;F;3465
+                List<Midia> ListamidiaAchada = midiasCadastradas.Buscar("", "", "", dados[2]);
+                Midia midiaAchada;
+                if (ListamidiaAchada.size() != 0) {
+                    midiaAchada = ListamidiaAchada.get(0);
+                    midiasCadastradas.RemoverMidia(midiaAchada);
+                    midiaAchada.AdicionarView();
+                    midiasCadastradas.AdicionarMidia(midiaAchada);
+                    for (int i = 0; i < clientesCadastrados.size(); i++) {
+                        if (clientesCadastrados.get(i).login.equals(dados[0])) {
+                            if (dados[1].equals("F")) {
+                                clientesCadastrados.get(i).MidiasFuturas.AdicionarMidia(midiaAchada);
+                            } else {
+                                clientesCadastrados.get(i).MidiasAssistidas.AdicionarMidia(midiaAchada);
 
-                Midia midiaAchada = midiasCadastradas.Buscar("", "", "", dados[2]).get(0);
-                midiasCadastradas.RemoverMidia(midiaAchada);
-                midiaAchada.AdicionarView();
-                midiasCadastradas.AdicionarMidia(midiaAchada);
-
-                for (int i = 0; i < clientesCadastrados.size(); i++) {
-                    if (clientesCadastrados.get(i).login.equals(dados[0])) {
-                        if (dados[1].equals("F")) {
-                            clientesCadastrados.get(i).MidiasFuturas.AdicionarMidia(midiaAchada);
-                        } else {
-                            clientesCadastrados.get(i).MidiasAssistidas.AdicionarMidia(midiaAchada);
-
+                            }
                         }
                     }
                 }
-
             }
         } catch (IOException e) {
             e.printStackTrace();

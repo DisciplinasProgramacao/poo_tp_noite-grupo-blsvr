@@ -1,15 +1,16 @@
-import java.util.Date;
+import java.util.List;
+
+import Util.Data;
 
 abstract public class Midia {
 
     String nome;
     String idioma;
     String genero;
-    Date DataLancamento;
-    int ID;
+    Data DataLancamento;
+    String ID;
     int visualizacoes;
-    int MediaAvaliacoes;
-    int totalAvaliacoes;
+    List<Avaliacao> Avaliacoes;
 
     /**
      * Adiciona uma visualização a midia
@@ -18,12 +19,15 @@ abstract public class Midia {
         this.visualizacoes++;
     }
 
-    public void Avaliar(int Nota) {
-        if (Nota <= 5) {
-            totalAvaliacoes += Nota;
-            MediaAvaliacoes = visualizacoes / totalAvaliacoes;
-            return;
+    public double MediaAvaliacoes() {
+        double media = 0;
+        
+        for (Avaliacao avaliacao : Avaliacoes) {
+            media += avaliacao.Nota;
         }
+
+        return media / Avaliacoes.size();
+
     }
 
 }

@@ -7,7 +7,7 @@ public class App {
 
         sesao.cadastrarVariosUsuarios("arquivos/POO_Espectadores.csv");
         sesao.cadastrarVariasMidias("arquivos/POO_Series.csv", "arquivos/POO_Filmes.csv");
-        sesao.cadastrarAudiencia("arquivos/POO_Audiencia.csv");
+        // sesao.cadastrarAudiencia("arquivos/POO_Audiencia.csv");
 
         Scanner ler1 = new Scanner(System.in);
         int escolha;
@@ -31,6 +31,10 @@ public class App {
                     break;
 
                 default:
+
+                case 2:
+                    // CRIAR CONTA AQUI
+
                     break;
 
             }
@@ -39,8 +43,14 @@ public class App {
         boolean sair = false;
         while (!sair) {
 
-            System.out.println("BEM-VINDO");
-            System.out.println("ESCOLHA SUA AÇÃO:");
+            System.out.println("Bem-vindo");
+            System.out.println("Escolha sua ação: ");
+
+            System.out.println("1 - Pesquisar midia");
+            System.out.println("2 - Verificar sua lista assistida");
+            System.out.println("3 - Verificar sua lista para assistir");
+
+            escolha = ler1.nextInt();
 
         }
 
