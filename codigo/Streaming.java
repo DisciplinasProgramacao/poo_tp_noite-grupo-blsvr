@@ -16,6 +16,18 @@ public class Streaming {
         this.midiasCadastradas = new ListaMidia();
     }
 
+    public Cliente entrar(String Login, String Senha) {
+
+        for (int i = 0; i < clientesCadastrados.size(); i++) {
+            if (clientesCadastrados.get(i).login.equals(Login) && clientesCadastrados.get(i).senha.equals(Senha)) {
+                Cliente retorno = clientesCadastrados.get(i);
+                return retorno;
+            }
+        }
+        return null;
+
+    }
+
     /**
      * Verifica se o usuário inseriu sua senha e login corretamente
      * 
@@ -24,16 +36,11 @@ public class Streaming {
      * @return Retorna verdadeiro se o usuário foi encontrado ou falso se o usuário
      *         não foi encontrado
      */
-    public boolean entrar(String Senha, String Login) {
+    public boolean Confirmar(String Senha, String Login) {
 
-        for (int i = 0; i < clientesCadastrados.size(); i++) {
-            if (clientesCadastrados.get(i).login.equals(Login) && clientesCadastrados.get(i).senha.equals(Senha)) {
-                System.out.println("ENTROU");
-
-                return true;
-            }
+        if (entrar(Login, Senha) != null) {
+            return true;
         }
-        System.out.println("N ENTROU");
         return false;
     }
 
@@ -47,7 +54,7 @@ public class Streaming {
      */
     public void cadastrar(String Login, String Senha, String Nome) {
         Cliente novoCliente = new Cliente(Senha, Login, Nome);
-        if (!entrar(Senha, Login)) {
+        if (!Confirmar(Senha, Login)) {
             clientesCadastrados.add(novoCliente);
         }
     }

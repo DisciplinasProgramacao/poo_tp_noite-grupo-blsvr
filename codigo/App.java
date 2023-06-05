@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.stream.Stream;
 
 public class App {
     public static void main(String[] args) {
@@ -7,14 +8,14 @@ public class App {
 
         sesao.cadastrarVariosUsuarios("arquivos/POO_Espectadores.csv");
         sesao.cadastrarVariasMidias("arquivos/POO_Series.csv", "arquivos/POO_Filmes.csv");
-        // sesao.cadastrarAudiencia("arquivos/POO_Audiencia.csv");
+        sesao.cadastrarAudiencia("arquivos/POO_Audiencia.csv");
 
         Scanner ler1 = new Scanner(System.in);
         int escolha;
         String login = "";
         String senha = "";
-        boolean Verificado = false;
-        while (!Verificado) {
+        Cliente Logado = null;
+        while (Logado == null) {
             System.out.println("Você deseja:");
             System.out.println("1: Entrar na conta");
             System.out.println("2: Criar uma conta");
@@ -27,7 +28,8 @@ public class App {
                     login = ler1.next();
                     System.out.println("Digite sua senha");
                     senha = ler1.next();
-                    Verificado = sesao.entrar(senha, login);
+                    Logado = sesao.entrar(senha, login);
+
                     break;
 
                 default:
@@ -51,6 +53,19 @@ public class App {
             System.out.println("3 - Verificar sua lista para assistir");
 
             escolha = ler1.nextInt();
+
+            switch (escolha) {
+                case 1:
+
+                    System.out.println("DIGITE O NOME DA MÍDIA A SER BUSCADA");
+
+
+
+                    break;
+
+                default:
+                    break;
+            }
 
         }
 
