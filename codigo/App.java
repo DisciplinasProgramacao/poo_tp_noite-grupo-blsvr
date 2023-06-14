@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import java.util.stream.Stream;
 
 public class App {
     public static void main(String[] args) {
@@ -8,7 +7,7 @@ public class App {
 
         sesao.cadastrarVariosUsuarios("arquivos/POO_Espectadores.csv");
         sesao.cadastrarVariasMidias("arquivos/POO_Series.csv", "arquivos/POO_Filmes.csv");
-        sesao.cadastrarAudiencia("arquivos/POO_Audiencia.csv");
+        // sesao.cadastrarAudiencia("arquivos/POO_Audiencia.csv");
 
         Scanner ler1 = new Scanner(System.in);
         int escolha;
@@ -28,17 +27,24 @@ public class App {
                     login = ler1.next();
                     System.out.println("Digite sua senha");
                     senha = ler1.next();
-                    Logado = sesao.entrar(senha, login);
+                    Logado = sesao.entrar(login, senha);
+
+                    break;
+
+                case 2:
+
+                    System.out.println("Digite seu nome");
+                    String nome = ler1.next();
+                    System.out.println("Digite seu login");
+                    login = ler1.next();
+                    System.out.println("Digite sua senha");
+                    senha = ler1.next();
+                    sesao.cadastrar(login, senha, nome);
 
                     break;
 
                 default:
-
-                case 2:
-                    // CRIAR CONTA AQUI
-
                     break;
-
             }
         }
 
@@ -58,8 +64,6 @@ public class App {
                 case 1:
 
                     System.out.println("DIGITE O NOME DA MÍDIA A SER BUSCADA");
-
-
 
                     break;
 

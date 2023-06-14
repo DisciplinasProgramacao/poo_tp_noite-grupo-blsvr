@@ -53,9 +53,10 @@ public class Streaming {
      * @param Nome  Nome inserido pelo cliente a ser adicionado
      */
     public void cadastrar(String Login, String Senha, String Nome) {
-        Cliente novoCliente = new Cliente(Senha, Login, Nome);
+        Cliente novoCliente = new Cliente(Nome, Login, Senha);
         if (!Confirmar(Senha, Login)) {
             clientesCadastrados.add(novoCliente);
+            System.out.println("ADICIONADO");
         }
     }
 
