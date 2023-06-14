@@ -8,8 +8,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 public class Streaming {
-    private List<Cliente> clientesCadastrados;
-    private ListaMidia midiasCadastradas;
+    List<Cliente> clientesCadastrados;
+    ListaMidia midiasCadastradas;
 
     public Streaming() {
         this.clientesCadastrados = new ArrayList<Cliente>();
@@ -52,12 +52,15 @@ public class Streaming {
      * @param Senha Senha inserida pelo cliente a ser adicionado
      * @param Nome  Nome inserido pelo cliente a ser adicionado
      */
-    public void cadastrar(String Login, String Senha, String Nome) {
+    public void cadastrar(String Login, String Senha, String Nome) throws Exception {
         Cliente novoCliente = new Cliente(Nome, Login, Senha);
         if (!Confirmar(Senha, Login)) {
             clientesCadastrados.add(novoCliente);
-            System.out.println("ADICIONADO");
         }
+        else{
+            throw new Exception("Cliente já existente");
+        }
+
     }
 
     // #region Cadastros vindo de arquivos

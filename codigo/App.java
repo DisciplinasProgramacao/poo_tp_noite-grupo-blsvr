@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Scanner;
 
 public class App {
@@ -18,8 +19,13 @@ public class App {
             System.out.println("Você deseja:");
             System.out.println("1: Entrar na conta");
             System.out.println("2: Criar uma conta");
-            escolha = ler1.nextInt();
-
+            try {
+                escolha = ler1.nextInt();
+            } catch (Exception e) {
+                System.out.println("Digite apenas números inteiros.");
+                escolha = -1;
+                ler1.nextLine();
+            }
             switch (escolha) {
                 case 1:
 
@@ -28,6 +34,9 @@ public class App {
                     System.out.println("Digite sua senha");
                     senha = ler1.next();
                     Logado = sesao.entrar(login, senha);
+                    if (Logado == null) {
+                        System.out.println("Nome ou senha inválidos");
+                    }
 
                     break;
 
@@ -39,11 +48,17 @@ public class App {
                     login = ler1.next();
                     System.out.println("Digite sua senha");
                     senha = ler1.next();
-                    sesao.cadastrar(login, senha, nome);
+                    try {
+                        sesao.cadastrar(login, senha, nome);
+
+                    } catch (Exception e) {
+                        System.out.println(e.toString());
+                    }
 
                     break;
 
                 default:
+                    System.out.println("Escolha inválida.");
                     break;
             }
         }
@@ -54,7 +69,7 @@ public class App {
             System.out.println("Bem-vindo");
             System.out.println("Escolha sua ação: ");
 
-            System.out.println("1 - Pesquisar midia");
+            System.out.println("1 - Pesquisar midias cadastradas no sistema");
             System.out.println("2 - Verificar sua lista assistida");
             System.out.println("3 - Verificar sua lista para assistir");
 
@@ -63,10 +78,35 @@ public class App {
             switch (escolha) {
                 case 1:
 
-                    System.out.println("DIGITE O NOME DA MÍDIA A SER BUSCADA");
+                    System.out.println("Digite o nome da mídia que deseja buscar");
+                    String NomeBuscado = ler1.next();
+                    List<Midia> ListaBuscada = sesao.midiasCadastradas.Buscar(NomeBuscado, "", "", "");
+                    int contador = 1;
+                    if (ListaBuscada.size() == 0) {
+                        System.out.println("Não foram encontradas nenhuma mídia com esse nome");
+                    } else {
+                        System.out.println("Mídias encontradas:\n");
+                        ListaBuscada.stream().forEach(Midia -> System.out
+                                .println("Série encontrada número: " + contador + Midia.nome + "\n"));
 
+                        System.out.println("Deseja saber detalhes sobre alguma série?");
+                        System.out.println("Caso sim digite o número da mídia mostrada na lista");
+                        System.out.println("Caso deseje sair digite -1");
+
+                        escolha = ler1.nextInt();
+
+                        System.out.println("Dados da mídia:");
+
+
+                        
+
+
+                    }
                     break;
 
+                case 2:
+
+                    break;
                 default:
                     break;
             }
