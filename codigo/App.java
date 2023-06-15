@@ -5,12 +5,15 @@ import java.util.Scanner;
 public class App {
     public static void main(String[] args) {
 
+        // #region PREENCHIMENTO DO SISTEMA
         Streaming sesao = new Streaming();
         sesao.cadastrarVariosUsuarios("arquivos/POO_Espectadores.csv");
         sesao.cadastrarVariasMidias("arquivos/POO_Series.csv", "arquivos/POO_Filmes.csv");
         sesao.cadastrarAudiencia("arquivos/POO_Audiencia.csv");
         Scanner ler1 = new Scanner(System.in);
         boolean fechar = false;
+        // #endregion
+
         while (!fechar) {
 
             // #region LOGIN / CADASTRO
