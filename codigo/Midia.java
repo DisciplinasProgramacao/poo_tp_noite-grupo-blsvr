@@ -19,7 +19,8 @@ abstract public class Midia {
      * @return Retorna uma String contendo as informações
      */
     public String dadosMidia() {
-        String retorno = "Nome: " + nome + "\n Quantidade de visualizações: " + visualizacoes + "\n Média de avaliações: " + this.MediaAvaliacoes();
+        String retorno = "\n Nome: " + nome + "\n Quantidade de visualizações: " + visualizacoes
+                + "\n Média de avaliações: " + this.MediaAvaliacoes();
         return retorno;
     }
 
