@@ -21,9 +21,14 @@ public class Cliente {
      * @param assistida Midia que foi assistida
      */
     public void assistir(Midia assistida) {
-        MidiasAssistidas.AdicionarMidia(assistida);
-        assistida.AdicionarView();
-        MidiasFuturas.RemoverMidia(assistida);
+
+        if (!MidiasAssistidas.Contem(assistida.ID)) {
+            assistida.AdicionarView();
+            MidiasAssistidas.AdicionarMidia(assistida.ID, assistida);
+        } else {
+            System.out.println("Mídia já assistida");
+        }
+
     }
 
     /**
@@ -31,15 +36,17 @@ public class Cliente {
      * 
      * @param planejada Mídia planejada para assistir
      */
-    public void planejarParaAssistir(Serie planejada) {
-        if (!MidiasFuturas.Contem(planejada))
-            MidiasFuturas.AdicionarMidia(planejada);
+    public void planejarParaAssistir(Midia planejada) {
+        if (!MidiasFuturas.Contem(planejada.ID))
+            MidiasFuturas.AdicionarMidia(planejada.ID, planejada);
     }
 
     public void Avaliar(Midia Avaliar, int Nota) {
-        if (MidiasAssistidas.Contem(Avaliar)) {
+        if (MidiasAssistidas.Contem(Avaliar.ID)) {
             Avaliacao novaAvaliacao = new Avaliacao(Nota);
+            MidiasAssistidas.RemoverMidia(Avaliar.ID, Avaliar);
             Avaliar.Avaliacoes.add(novaAvaliacao);
+            MidiasAssistidas.AdicionarMidia(Avaliar.ID, Avaliar);
         }
     }
 }

@@ -1,17 +1,26 @@
-import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class ListaMidia {
-    private List<Midia> listaDeMidias;
+    private HashMap<String, Midia> listaDeMidias;
 
     public ListaMidia() {
-        listaDeMidias = new ArrayList<Midia>();
+        listaDeMidias = new HashMap<>();
     }
 
     public void imprimirLista() {
         System.out.println(listaDeMidias.size());
-        listaDeMidias.stream().forEach(Midia -> System.out.println(Midia.ID));
+
+        listaDeMidias.values().stream().forEach(Midia -> System.out.println(Midia.ID));
+
+    }
+
+    public Midia Buscar(String ID) {
+        if (listaDeMidias.containsKey(ID)) {
+            return listaDeMidias.get(ID);
+        }
+        return null;
     }
 
     /**
@@ -30,8 +39,8 @@ public class ListaMidia {
     public List<Midia> Buscar(String nome, String idioma, String genero, String id) {
 
         List<Midia> ListaRetorno = new ArrayList<Midia>();
-        
-        for (Midia analisada : listaDeMidias) {
+
+        for (Midia analisada : listaDeMidias.values()) {
             boolean nomeMatch = nome.isEmpty() || analisada.nome.contains(nome);
             boolean idiomaMatch = idioma.isEmpty() || analisada.idioma.contains(idioma);
             boolean generoMatch = genero.isEmpty() || analisada.genero.contains(genero);
@@ -49,8 +58,8 @@ public class ListaMidia {
      * 
      * @param Adicionada Mídia a ser adicionada
      */
-    public void AdicionarMidia(Midia Adicionada) {
-        this.listaDeMidias.add(Adicionada);
+    public void AdicionarMidia(String Id, Midia Adicionada) {
+        this.listaDeMidias.put(Id, Adicionada);
     }
 
     /**
@@ -58,8 +67,8 @@ public class ListaMidia {
      * 
      * @param Adicionada Mídia a ser removida
      */
-    public void RemoverMidia(Midia Adicionada) {
-        this.listaDeMidias.remove(Adicionada);
+    public void RemoverMidia(String Id, Midia Adicionada) {
+        this.listaDeMidias.remove(Id, Adicionada);
     }
 
     /**
@@ -69,17 +78,8 @@ public class ListaMidia {
      * @return Retorna verdadeiro se a midia foi encontrada e falso caso a midia não
      *         foi encontrada
      */
-    public boolean Contem(Midia Pesquisada) {
-
-        for (int i = 0; i < listaDeMidias.size(); i++) {
-
-            if (listaDeMidias.get(i).equals(Pesquisada)) {
-                return true;
-            }
-        }
-
-        return false;
-
+    public boolean Contem(String Id) {
+        return listaDeMidias.containsKey(Id);
     }
 
 }

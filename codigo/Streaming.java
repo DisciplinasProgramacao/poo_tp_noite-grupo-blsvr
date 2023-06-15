@@ -1,5 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -8,21 +7,29 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 public class Streaming {
-    List<Cliente> clientesCadastrados;
+    HashMap<String, Cliente> clientesCadastrados;
     ListaMidia midiasCadastradas;
 
     public Streaming() {
-        this.clientesCadastrados = new ArrayList<Cliente>();
+        this.clientesCadastrados = new HashMap<String, Cliente>();
         this.midiasCadastradas = new ListaMidia();
     }
 
+    /**
+     * Verifica se o cliente existe e retorna o cliente
+     * 
+     * @param Login Login do cliente
+     * @param Senha Senha do cliente
+     * @return Retorna o cliente se ele estiver registrado ou nulo se o cliente não
+     *         for encontrado.
+     */
     public Cliente entrar(String Login, String Senha) {
 
-        for (int i = 0; i < clientesCadastrados.size(); i++) {
-            if (clientesCadastrados.get(i).login.equals(Login) && clientesCadastrados.get(i).senha.equals(Senha)) {
-                Cliente retorno = clientesCadastrados.get(i);
-                return retorno;
-            }
+        if (clientesCadastrados.containsKey(Login)) {
+
+            Cliente cliente = clientesCadastrados.get(Login);
+
+            return cliente;
         }
         return null;
 
@@ -55,9 +62,8 @@ public class Streaming {
     public void cadastrar(String Login, String Senha, String Nome) throws Exception {
         Cliente novoCliente = new Cliente(Nome, Login, Senha);
         if (!Confirmar(Senha, Login)) {
-            clientesCadastrados.add(novoCliente);
-        }
-        else{
+            clientesCadastrados.putIfAbsent(Login, novoCliente);
+        } else {
             throw new Exception("Cliente já existente");
         }
 
@@ -81,8 +87,10 @@ public class Streaming {
 
             while (ler1.hasNextLine()) {
                 String[] dados = ler1.nextLine().split(";");
-                Cliente novoCliente = new Cliente(dados[0], dados[1], dados[2]);
-                clientesCadastrados.add(novoCliente);
+                if (dados != null) {
+                    Cliente novoCliente = new Cliente(dados[0], dados[1], dados[2]);
+                    clientesCadastrados.put(dados[1], novoCliente);
+                }
             }
             ler1.close();
         } catch (FileNotFoundException x) {
@@ -106,8 +114,8 @@ public class Streaming {
             while ((linha = br.readLine()) != null) {
                 String[] dados = linha.split(separador);
                 // 3489;Yellow County;14/09/2016
-                Serie novaSeria = new Serie(dados[1], "", "", dados[2], dados[0], 0, 0);
-                midiasCadastradas.AdicionarMidia(novaSeria);
+                Serie novaSerie = new Serie(dados[1], "", "", dados[2], dados[0], 0, 0);
+                midiasCadastradas.AdicionarMidia(novaSerie.ID, novaSerie);
             }
 
             br.close();
@@ -120,8 +128,7 @@ public class Streaming {
                 String[] dados = linha.split(separador);
                 // 9752;Defenders Of Our Future;17/12/2016;112
                 Filme novoFilme = new Filme(dados[1], "", "", dados[2], dados[0], 0, dados[3]);
-                midiasCadastradas.AdicionarMidia(novoFilme);
-
+                midiasCadastradas.AdicionarMidia(novoFilme.ID, novoFilme);
             }
         } catch (IOException x) {
             x.printStackTrace();
@@ -145,23 +152,15 @@ public class Streaming {
         try (BufferedReader br = new BufferedReader(new FileReader(arquivoCSV))) {
             while ((linha = br.readLine()) != null) {
                 String[] dados = linha.split(separador);
-                // Nei144706;F;3465
-                List<Midia> ListamidiaAchada = midiasCadastradas.Buscar("", "", "", dados[2]);
-                Midia midiaAchada;
-                if (ListamidiaAchada.size() != 0) {
-                    midiaAchada = ListamidiaAchada.get(0);
-                    midiasCadastradas.RemoverMidia(midiaAchada);
-                    midiaAchada.AdicionarView();
-                    midiasCadastradas.AdicionarMidia(midiaAchada);
-                    for (int i = 0; i < clientesCadastrados.size(); i++) {
-                        if (clientesCadastrados.get(i).login.equals(dados[0])) {
-                            if (dados[1].equals("F")) {
-                                clientesCadastrados.get(i).MidiasFuturas.AdicionarMidia(midiaAchada);
-                            } else {
-                                clientesCadastrados.get(i).MidiasAssistidas.AdicionarMidia(midiaAchada);
 
-                            }
-                        }
+                // Nei144706;F;3465
+
+                Midia assistida = midiasCadastradas.Buscar(dados[2]);
+                if (clientesCadastrados.containsKey(dados[0]) && midiasCadastradas.Contem(dados[2])) {
+                    if (dados[1].equals("F")) {
+                        clientesCadastrados.get(dados[0]).assistir(assistida);
+                    } else {
+                        clientesCadastrados.get(dados[0]).planejarParaAssistir(assistida);
                     }
                 }
             }

@@ -8,14 +8,15 @@ public class App {
 
         sesao.cadastrarVariosUsuarios("arquivos/POO_Espectadores.csv");
         sesao.cadastrarVariasMidias("arquivos/POO_Series.csv", "arquivos/POO_Filmes.csv");
-        // sesao.cadastrarAudiencia("arquivos/POO_Audiencia.csv");
-
+        sesao.cadastrarAudiencia("arquivos/POO_Audiencia.csv");
+        // #region LOGIN / CADASTRO
         Scanner ler1 = new Scanner(System.in);
         int escolha;
         String login = "";
         String senha = "";
-        Cliente Logado = null;
-        while (Logado == null) {
+        Cliente Logado = new Cliente("", "", "");
+        boolean logado = false;
+        while (!logado) {
             System.out.println("Você deseja:");
             System.out.println("1: Entrar na conta");
             System.out.println("2: Criar uma conta");
@@ -33,11 +34,13 @@ public class App {
                     login = ler1.next();
                     System.out.println("Digite sua senha");
                     senha = ler1.next();
+
                     Logado = sesao.entrar(login, senha);
+
                     if (Logado == null) {
                         System.out.println("Nome ou senha inválidos");
-                    }
-
+                    } else
+                        logado = true;
                     break;
 
                 case 2:
@@ -62,6 +65,7 @@ public class App {
                     break;
             }
         }
+        // #endregion
 
         boolean sair = false;
         while (!sair) {
@@ -81,25 +85,47 @@ public class App {
                     System.out.println("Digite o nome da mídia que deseja buscar");
                     String NomeBuscado = ler1.next();
                     List<Midia> ListaBuscada = sesao.midiasCadastradas.Buscar(NomeBuscado, "", "", "");
-                    int contador = 1;
+
                     if (ListaBuscada.size() == 0) {
                         System.out.println("Não foram encontradas nenhuma mídia com esse nome");
                     } else {
                         System.out.println("Mídias encontradas:\n");
                         ListaBuscada.stream().forEach(Midia -> System.out
-                                .println("Série encontrada número: " + contador + Midia.nome + "\n"));
+                                .println("Número de identificação: " + Midia.ID + ": " + Midia.nome + "\n"));
 
-                        System.out.println("Deseja saber detalhes sobre alguma série?");
-                        System.out.println("Caso sim digite o número da mídia mostrada na lista");
+                        boolean escolhaValida = false;
+                        while (!escolhaValida)
+
+                            System.out.println("Deseja saber detalhes sobre alguma série?");
+                        System.out.println("Caso sim digite o número de identificação da mídia mostrada na lista");
                         System.out.println("Caso deseje sair digite -1");
 
                         escolha = ler1.nextInt();
 
-                        System.out.println("Dados da mídia:");
+                        Midia midiaSelecionada;
+                        if (sesao.midiasCadastradas.Contem(String.valueOf(escolha))) {
 
+                            System.out.println("Dados da mídia:");
 
-                        
+                            midiaSelecionada = sesao.midiasCadastradas.Buscar(String.valueOf(escolha));
+                            System.out.println(midiaSelecionada.dadosMidia());
+                        } else {
+                            System.out.println("Código inválido");
+                        }
 
+                        System.out.println("1 - inserir essa mídia em sua lista para assistir");
+                        System.out.println("2 - Assistir a série");
+
+                        escolha = ler1.nextInt();
+
+                        switch (escolha) {
+                            case 1:
+
+                                break;
+
+                            default:
+                                break;
+                        }
 
                     }
                     break;
