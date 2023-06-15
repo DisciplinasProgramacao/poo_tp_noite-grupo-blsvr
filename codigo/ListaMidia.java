@@ -23,6 +23,10 @@ public class ListaMidia {
         return null;
     }
 
+    public int tamanhoLista() {
+        return listaDeMidias.size();
+    }
+
     /**
      * Parâmetros vazios serão ignorados durante a busca. Esse método retorna uma
      * lista de mídia com todas as mídias que contenham a busca retornará uma lista
@@ -65,7 +69,7 @@ public class ListaMidia {
     /**
      * Remove da lista a midia passada como parâmetro
      * 
-     * @param Adicionada Mídia a ser removida
+     * @param Removida Mídia a ser removida
      */
     public void RemoverMidia(String Id, Midia Adicionada) {
         this.listaDeMidias.remove(Id, Adicionada);

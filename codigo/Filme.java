@@ -14,4 +14,12 @@ public class Filme extends Midia {
         this.duracaoMinutos = duracaoMinutos;
 
     }
+
+    @Override
+    public String dadosMidia() {
+        String retorno = "Nome: " + nome + "\n Quantidade de visualizações: " + visualizacoes
+                + "\n Média de avaliações: " + this.MediaAvaliacoes() + "\n Duração: " + duracaoMinutos + " minutos";
+        return retorno;
+    }
+
 }

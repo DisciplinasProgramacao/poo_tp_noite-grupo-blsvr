@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 import Util.Data;
@@ -18,8 +19,17 @@ abstract public class Midia {
      * @return Retorna uma String contendo as informações
      */
     public String dadosMidia() {
-        String retorno = "Nome: " + nome + "\n Quantidade de visualizações: " + visualizacoes;
+        String retorno = "Nome: " + nome + "\n Quantidade de visualizações: " + visualizacoes + "\n Média de avaliações: " + this.MediaAvaliacoes();
         return retorno;
+    }
+
+    public Midia() {
+        Avaliacoes = new ArrayList<>();
+        DataLancamento = new Data();
+    }
+
+    public void AdicionarAvaliacao(Avaliacao novaAval) {
+        this.Avaliacoes.add(novaAval);
     }
 
     /**
@@ -27,10 +37,6 @@ abstract public class Midia {
      */
     public void AdicionarView() {
         this.visualizacoes++;
-    }
-
-    public void AdicionarAvaliacao(Avaliacao novaAval) {
-        this.Avaliacoes.add(novaAval);
     }
 
     /**

@@ -18,4 +18,11 @@ public class Serie extends Midia {
 
     }
 
+    @Override
+    public String dadosMidia() {
+        String retorno = "Nome: " + nome + "\n Quantidade de visualizações: " + visualizacoes
+                + "\n Média de avaliações: " + this.MediaAvaliacoes() + "\n Número de episódios: " + quantidadeEpisodios + " episódios";
+        return retorno;
+    }
+
 }

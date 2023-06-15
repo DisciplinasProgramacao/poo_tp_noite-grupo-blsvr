@@ -161,14 +161,36 @@ public class App {
 
                 case 2:
 
-                    System.out.println("As seguintes midias estão em sua lista de assistidas:");
-                    Logado.MidiasAssistidas.imprimirLista();
+                    if (Logado.MidiasAssistidas.tamanhoLista() > 0) {
+
+                        System.out.println("As seguintes midias estão em sua lista de assistidas:");
+                        Logado.MidiasAssistidas.imprimirLista();
+                    } else {
+                        System.out.println("Sua lista está vazia");
+                    }
 
                     break;
                 case 3:
 
-                    System.out.println("As seguintes midias estão em sua lista para assistir futuramente:");
-                    Logado.MidiasFuturas.imprimirLista();
+                    if (Logado.MidiasFuturas.tamanhoLista() > 0) {
+                        System.out.println("As seguintes midias estão em sua lista para assistir futuramente:");
+
+                        Logado.MidiasFuturas.imprimirLista();
+
+                        System.out.println("Caso deseje remover alguma mídia, digite seu código");
+                        System.out.println("Caso contrário digite -1");
+
+                        escolha = ler1.nextInt();
+                        String Id = String.valueOf(escolha);
+
+                        if (Logado.MidiasFuturas.Contem(Id)) {
+                            Logado.MidiasFuturas.RemoverMidia(Id, Logado.MidiasFuturas.Buscar(Id));
+                            System.out.println("\nVocê acabou de remover uma mídia de sua lista\n");
+                        }
+
+                    } else {
+                        System.out.println("\nSua lista está vazia\n");
+                    }
 
                     break;
                 case 4:
@@ -184,6 +206,8 @@ public class App {
 
                         Midia Analisada = Logado.MidiasAssistidas.Buscar(String.valueOf(escolha));
 
+                        System.out.println(Analisada.dadosMidia());
+
                         System.out
                                 .println("Digite uma nota de 0 a 5 para " + Analisada.nome);
 
@@ -191,7 +215,7 @@ public class App {
 
                         Avaliacao novaAvaliacao = new Avaliacao(escolha);
 
-                        Analisada.AdicionarAvaliacao(novaAvaliacao); // java.lang.NullPointerException ?????????????
+                        Analisada.AdicionarAvaliacao(novaAvaliacao);
 
                         System.out.println("Midia Avaliada");
 
