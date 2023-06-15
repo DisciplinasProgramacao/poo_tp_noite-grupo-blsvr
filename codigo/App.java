@@ -4,14 +4,14 @@ import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) {
+
+        Streaming sesao = new Streaming();
+        sesao.cadastrarVariosUsuarios("arquivos/POO_Espectadores.csv");
+        sesao.cadastrarVariasMidias("arquivos/POO_Series.csv", "arquivos/POO_Filmes.csv");
+        sesao.cadastrarAudiencia("arquivos/POO_Audiencia.csv");
         Scanner ler1 = new Scanner(System.in);
         boolean fechar = false;
         while (!fechar) {
-            Streaming sesao = new Streaming();
-
-            sesao.cadastrarVariosUsuarios("arquivos/POO_Espectadores.csv");
-            sesao.cadastrarVariasMidias("arquivos/POO_Series.csv", "arquivos/POO_Filmes.csv");
-            sesao.cadastrarAudiencia("arquivos/POO_Audiencia.csv");
 
             // #region LOGIN / CADASTRO
             int escolha;
@@ -98,7 +98,7 @@ public class App {
                         String NomeBuscado = ler1.next();
                         List<Midia> ListaBuscada = sesao.midiasCadastradas.Buscar(NomeBuscado, "", "", "");
 
-                        if (ListaBuscada.size() == 0) {
+                        if (ListaBuscada.size() <= 0) {
                             System.out.println("Não foram encontradas nenhuma mídia com esse nome");
                         } else {
                             System.out.println("Mídias encontradas:\n");
@@ -160,21 +160,22 @@ public class App {
                                             break;
                                     }
 
-                                    escolhaValida = true;
-
                                 } else {
                                     System.out.println("Código inválido");
                                 }
 
+                                escolhaValida = true;
+
                             }
                             break;
                         }
-                        // #endregion
+                        break;
+                    // #endregion
 
-                        // #region Verificar assistidas
+                    // #region Verificar assistidas
                     case 2:
 
-                        if (Logado.MidiasAssistidas.tamanhoLista() > 0) {
+                        if (!Logado.MidiasAssistidas.isVazia()) {
 
                             System.out.println("As seguintes midias estão em sua lista de assistidas:");
                             Logado.MidiasAssistidas.imprimirLista();
@@ -188,7 +189,7 @@ public class App {
                     // #region Verificar para assistir
                     case 3:
 
-                        if (Logado.MidiasFuturas.tamanhoLista() > 0) {
+                        if (!Logado.MidiasFuturas.isVazia()) {
                             System.out.println("As seguintes midias estão em sua lista para assistir futuramente:");
 
                             Logado.MidiasFuturas.imprimirLista();
@@ -218,32 +219,45 @@ public class App {
                     // #region Avaliar Midia
                     case 4:
 
-                        System.out.println("As seguintes mídias estão em sua lista de mídias e podem ser avaliadas:");
-                        Logado.MidiasAssistidas.imprimirLista();
-
-                        System.out.println("\n Digite o código da mídia que deseje avaliar: ");
-
-                        escolha = ler1.nextInt();
-
-                        if (Logado.MidiasAssistidas.Contem(String.valueOf(escolha))) {
-
-                            Midia Analisada = Logado.MidiasAssistidas.Buscar(String.valueOf(escolha));
-
-                            System.out.println(Analisada.dadosMidia());
-
+                        if (!Logado.MidiasAssistidas.isVazia()) {
                             System.out
-                                    .println("Digite uma nota de 0 a 5 para " + Analisada.nome);
+                                    .println("As seguintes mídias estão em sua lista de mídias e podem ser avaliadas:");
+                            Logado.MidiasAssistidas.imprimirLista();
 
-                            escolha = ler1.nextInt();
+                            System.out.println("\n Digite o código da mídia que deseje avaliar: ");
 
-                            Avaliacao novaAvaliacao = new Avaliacao(escolha);
+                            try {
+                                escolha = ler1.nextInt();
+                            } catch (InputMismatchException e) {
+                                System.out.println("Escolha inválida");
+                            }
 
-                            Analisada.AdicionarAvaliacao(novaAvaliacao);
+                            if (Logado.MidiasAssistidas.Contem(String.valueOf(escolha))) {
 
-                            System.out.println("Midia Avaliada");
+                                Midia Analisada = Logado.MidiasAssistidas.Buscar(String.valueOf(escolha));
+
+                                System.out.println(Analisada.dadosMidia());
+
+                                System.out
+                                        .println("Digite uma nota de 0 a 5 para " + Analisada.nome);
+
+                                escolha = ler1.nextInt();
+
+                                Avaliacao novaAvaliacao = new Avaliacao(escolha);
+                                try {
+                                    System.out.println("Midia Avaliada");
+                                    Analisada.AdicionarAvaliacao(novaAvaliacao);
+
+                                } catch (IllegalArgumentException e) {
+                                    System.out.println(e.toString());
+                                }
+
+                            } else {
+                                System.out.println("Mídia não está na sua lista de assistidos.");
+                            }
 
                         } else {
-                            System.out.println("Mídia não está na sua lista de assistidos.");
+                            System.out.println("Sua lista está vazia");
                         }
 
                         break;

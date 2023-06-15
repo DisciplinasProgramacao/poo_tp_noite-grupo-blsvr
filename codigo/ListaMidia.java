@@ -16,6 +16,10 @@ public class ListaMidia {
 
     }
 
+    public Boolean isVazia() {
+        return listaDeMidias.size() <= 0 ? true : false;
+    }
+
     public Midia Buscar(String ID) {
         if (listaDeMidias.containsKey(ID)) {
             return listaDeMidias.get(ID);
