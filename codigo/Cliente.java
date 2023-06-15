@@ -25,7 +25,7 @@ public class Cliente {
         if (!MidiasAssistidas.Contem(assistida.ID)) {
             assistida.AdicionarView();
             MidiasAssistidas.AdicionarMidia(assistida.ID, assistida);
-            
+
             if (MidiasFuturas.Contem(assistida.ID)) {
                 MidiasFuturas.RemoverMidia(assistida.ID, assistida);
             }
@@ -43,12 +43,4 @@ public class Cliente {
             MidiasFuturas.AdicionarMidia(planejada.ID, planejada);
     }
 
-    public void Avaliar(Midia Avaliar, int Nota) {
-        if (MidiasAssistidas.Contem(Avaliar.ID)) {
-            Avaliacao novaAvaliacao = new Avaliacao(Nota);
-            MidiasAssistidas.RemoverMidia(Avaliar.ID, Avaliar);
-            Avaliar.Avaliacoes.add(novaAvaliacao);
-            MidiasAssistidas.AdicionarMidia(Avaliar.ID, Avaliar);
-        }
-    }
 }

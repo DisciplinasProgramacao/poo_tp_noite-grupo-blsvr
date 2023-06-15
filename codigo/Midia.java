@@ -29,6 +29,10 @@ abstract public class Midia {
         DataLancamento = new Data();
     }
 
+    /**
+     * Adiciona uma avaliação para a mídia
+     * @param novaAval Avaliação para adicionar para a mídia
+     */
     public void AdicionarAvaliacao(Avaliacao novaAval) {
         this.Avaliacoes.add(novaAval);
     }

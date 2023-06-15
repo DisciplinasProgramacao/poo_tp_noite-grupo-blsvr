@@ -9,6 +9,9 @@ public class ListaMidia {
         listaDeMidias = new HashMap<>();
     }
 
+    /**
+     * Imprime os dados de da mídia
+     */
     public void imprimirLista() {
 
         listaDeMidias.values().stream()
@@ -16,6 +19,12 @@ public class ListaMidia {
 
     }
 
+    /**
+     * Retorna se a lista está vazia ou não
+     * 
+     * @return Retorna verdadeiro se a lista estiver vazia e falso se a lista não
+     *         estiver vazia
+     */
     public Boolean isVazia() {
         return listaDeMidias.size() <= 0 ? true : false;
     }
@@ -27,6 +36,11 @@ public class ListaMidia {
         return null;
     }
 
+    /**
+     * Retorna o tamanho da lista
+     * 
+     * @return número inteiro com o total de itens na lista
+     */
     public int tamanhoLista() {
         return listaDeMidias.size();
     }
