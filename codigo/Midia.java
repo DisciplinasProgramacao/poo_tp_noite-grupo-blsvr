@@ -29,6 +29,10 @@ abstract public class Midia {
         this.visualizacoes++;
     }
 
+    public void AdicionarAvaliacao(Avaliacao novaAval) {
+        this.Avaliacoes.add(novaAval);
+    }
+
     /**
      * Calcula a média de todas as avaliações presentes na mídia
      * 

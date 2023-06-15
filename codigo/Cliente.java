@@ -25,7 +25,12 @@ public class Cliente {
         if (!MidiasAssistidas.Contem(assistida.ID)) {
             assistida.AdicionarView();
             MidiasAssistidas.AdicionarMidia(assistida.ID, assistida);
+            
+            if (MidiasFuturas.Contem(assistida.ID)) {
+                MidiasFuturas.RemoverMidia(assistida.ID, assistida);
+            }
         }
+
     }
 
     /**

@@ -10,9 +10,9 @@ public class ListaMidia {
     }
 
     public void imprimirLista() {
-        System.out.println(listaDeMidias.size());
 
-        listaDeMidias.values().stream().forEach(Midia -> System.out.println(Midia.ID));
+        listaDeMidias.values().stream()
+                .forEach(Midia -> System.out.println("Nome: " + Midia.nome + " Identificação: " + Midia.ID));
 
     }
 
