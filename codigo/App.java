@@ -129,7 +129,11 @@ public class App {
                                     System.out.println("2 - Assistir a série");
                                     System.out.println("3 - Sair");
 
-                                    escolha = ler1.nextInt();
+                                    try {
+                                        escolha = ler1.nextInt();
+                                    } catch (InputMismatchException e) {
+                                        System.out.println("Escolha inválida");
+                                    }
 
                                     switch (escolha) {
                                         case 1:
@@ -192,7 +196,11 @@ public class App {
                             System.out.println("Caso deseje remover alguma mídia, digite seu código");
                             System.out.println("Caso contrário digite -1");
 
-                            escolha = ler1.nextInt();
+                            try {
+                                escolha = ler1.nextInt();
+                            } catch (InputMismatchException e) {
+                                System.out.println("Escolha inválida");
+                            }
                             String Id = String.valueOf(escolha);
 
                             if (Logado.MidiasFuturas.Contem(Id)) {
