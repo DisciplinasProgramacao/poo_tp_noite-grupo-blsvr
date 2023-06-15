@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -94,47 +95,57 @@ public class App {
                                 .println("Número de identificação: " + Midia.ID + ": " + Midia.nome + "\n"));
 
                         boolean escolhaValida = false;
-                        while (!escolhaValida)
-
+                        Midia midiaSelecionada = null;
+                        while (!escolhaValida) {
                             System.out.println("Deseja saber detalhes sobre alguma série?");
-                        System.out.println("Caso sim digite o número de identificação da mídia mostrada na lista");
-                        System.out.println("Caso deseje sair digite -1");
+                            System.out.println("Caso sim digite o número de identificação da mídia mostrada na lista");
+                            System.out.println("Caso deseje sair digite -1");
 
-                        escolha = ler1.nextInt();
+                            try {
+                                escolha = ler1.nextInt();
+                            } catch (InputMismatchException e) {
+                                System.out.println("Escolha inválida");
+                            }
 
-                        Midia midiaSelecionada;
-                        if (sesao.midiasCadastradas.Contem(String.valueOf(escolha))) {
+                            if (sesao.midiasCadastradas.Contem(String.valueOf(escolha))) {
 
-                            System.out.println("Dados da mídia:");
+                                System.out.println("Dados da mídia:");
 
-                            midiaSelecionada = sesao.midiasCadastradas.Buscar(String.valueOf(escolha));
-                            System.out.println(midiaSelecionada.dadosMidia());
-                        } else {
-                            System.out.println("Código inválido");
+                                midiaSelecionada = sesao.midiasCadastradas.Buscar(String.valueOf(escolha));
+                                System.out.println(midiaSelecionada.dadosMidia());
+
+                                System.out.println("1 - inserir essa mídia em sua lista para assistir");
+                                System.out.println("2 - Assistir a série");
+                                System.out.println("3 - Sair");
+
+                                escolha = ler1.nextInt();
+
+                                switch (escolha) {
+                                    case 1:
+
+                                        Logado.planejarParaAssistir(midiaSelecionada);
+                                        System.out.println(midiaSelecionada.nome + " planejado para assistir.");
+
+                                        break;
+
+                                    case 2:
+                                        Logado.assistir(midiaSelecionada);
+                                        System.out.println("Você acabou de assistir " + midiaSelecionada.nome);
+
+                                        break;
+
+                                    default:
+                                        break;
+                                }
+
+                                escolhaValida = true;
+
+                            } else {
+                                System.out.println("Código inválido");
+                            }
+
                         }
-
-                        System.out.println("1 - inserir essa mídia em sua lista para assistir");
-                        System.out.println("2 - Assistir a série");
-
-                        escolha = ler1.nextInt();
-
-                        switch (escolha) {
-                            case 1:
-
-                                break;
-
-                            default:
-                                break;
-                        }
-
                     }
-                    break;
-
-                case 2:
-
-                    break;
-                default:
-                    break;
             }
 
         }

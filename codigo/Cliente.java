@@ -25,10 +25,7 @@ public class Cliente {
         if (!MidiasAssistidas.Contem(assistida.ID)) {
             assistida.AdicionarView();
             MidiasAssistidas.AdicionarMidia(assistida.ID, assistida);
-        } else {
-            System.out.println("Mídia já assistida");
         }
-
     }
 
     /**

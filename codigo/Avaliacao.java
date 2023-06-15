@@ -3,7 +3,8 @@ public class Avaliacao {
     static int NOTA_MAXIMA = 5;
 
     public Avaliacao(int Nota) {
-        this.Nota = Nota;
+        if (Nota <= NOTA_MAXIMA && Nota >= 0)
+            this.Nota = Nota;
     }
 
 }
