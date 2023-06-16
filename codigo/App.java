@@ -126,7 +126,7 @@ public class App {
                                     System.out.println("Dados da mídia:");
 
                                     midiaSelecionada = sesao.midiasCadastradas.Buscar(String.valueOf(escolha));
-                                    System.out.println(midiaSelecionada.dadosMidia());
+                                    System.out.println(midiaSelecionada.toString());
 
                                     System.out.println("1 - inserir essa mídia em sua lista para assistir");
                                     System.out.println("2 - Assistir a série");
@@ -239,15 +239,15 @@ public class App {
 
                                 Midia Analisada = Logado.MidiasAssistidas.Buscar(String.valueOf(escolha));
 
-                                System.out.println(Analisada.dadosMidia());
+                                System.out.println(Analisada.toString());
 
                                 System.out
                                         .println("Digite uma nota de 0 a 5 para " + Analisada.nome);
 
                                 escolha = ler1.nextInt();
 
-                                Avaliacao novaAvaliacao = new Avaliacao(escolha);
                                 try {
+                                Avaliacao novaAvaliacao = new Avaliacao(escolha);
                                     System.out.println("Midia Avaliada");
                                     Analisada.AdicionarAvaliacao(novaAvaliacao);
 

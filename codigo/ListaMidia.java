@@ -38,7 +38,6 @@ public class ListaMidia {
 
     /**
      * Retorna o tamanho da lista
-     * 
      * @return número inteiro com o total de itens na lista
      */
     public int tamanhoLista() {

@@ -16,7 +16,7 @@ public class Filme extends Midia {
     }
 
     @Override
-    public String dadosMidia() {
+    public String toString() {
         String retorno = "Nome: " + nome + "\n Quantidade de visualizações: " + visualizacoes
                 + "\n Média de avaliações: " + this.MediaAvaliacoes() + "\n Duração: " + duracaoMinutos + " minutos";
         return retorno;
