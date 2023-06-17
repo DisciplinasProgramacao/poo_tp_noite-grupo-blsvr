@@ -247,12 +247,12 @@ public class App {
                                 escolha = ler1.nextInt();
 
                                 try {
-                                Avaliacao novaAvaliacao = new Avaliacao(escolha);
+                                    Avaliacao novaAvaliacao = new Avaliacao(escolha, Logado);
                                     System.out.println("Midia Avaliada");
                                     Analisada.AdicionarAvaliacao(novaAvaliacao);
 
                                 } catch (IllegalArgumentException e) {
-                                    System.out.println(e.toString());
+                                    System.out.println(e.getMessage());
                                 }
 
                             } else {

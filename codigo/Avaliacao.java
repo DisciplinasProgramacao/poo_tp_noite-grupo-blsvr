@@ -1,5 +1,6 @@
 public class Avaliacao {
     int Nota;
+    Cliente Avaliador;
     static int NOTA_MAXIMA = 5;
 
     /**
@@ -7,7 +8,7 @@ public class Avaliacao {
      * 
      * @param Nota Número inteiro de 0 a 5
      */
-    public Avaliacao(int Nota) {
+    public Avaliacao(int Nota, Cliente Avaliador) {
         if (Nota <= NOTA_MAXIMA && Nota >= 0) {
             this.Nota = Nota;
         } else {

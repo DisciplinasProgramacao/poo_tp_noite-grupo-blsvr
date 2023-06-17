@@ -12,10 +12,8 @@ public class ClienteEspecialista extends Cliente {
      */
     public void Avaliar(Midia Avaliada, int Nota, String Descricao) {
         if (MidiasAssistidas.Contem(Avaliada.ID)) {
-            Avaliacao novaAvaliacao = new AvaliacaoEspecialista(Nota, Descricao);
-            MidiasAssistidas.RemoverMidia(Avaliada.ID, Avaliada);
+            Avaliacao novaAvaliacao = new AvaliacaoEspecialista(Nota, Descricao, this);
             Avaliada.Avaliacoes.add(novaAvaliacao);
-            MidiasAssistidas.AdicionarMidia(Avaliada.ID, Avaliada);
         }
     }
 }

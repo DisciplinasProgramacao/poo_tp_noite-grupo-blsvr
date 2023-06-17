@@ -9,8 +9,8 @@ public class AvaliacaoEspecialista extends Avaliacao {
      * @param nota      número inteiro de 0 a 5
      * @param Descricao String de descrição
      */
-    public AvaliacaoEspecialista(int nota, String Descricao) {
-        super(nota);
+    public AvaliacaoEspecialista(int nota, String Descricao, Cliente Avaliador) {
+        super(nota, Avaliador);
         this.Descricao = Descricao;
     }
 }

@@ -157,7 +157,7 @@ public class Streaming {
 
                 Midia assistida = midiasCadastradas.Buscar(dados[2]);
                 if (clientesCadastrados.containsKey(dados[0]) && midiasCadastradas.Contem(dados[2])) {
-                    if (dados[1].equals("F")) {
+                    if (dados[1].equals("A")) {
                         clientesCadastrados.get(dados[0]).assistir(assistida);
                     } else {
                         clientesCadastrados.get(dados[0]).planejarParaAssistir(assistida);

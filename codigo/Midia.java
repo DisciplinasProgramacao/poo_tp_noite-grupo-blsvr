@@ -31,10 +31,13 @@ abstract public class Midia {
 
     /**
      * Adiciona uma avaliação para a mídia
+     * 
      * @param novaAval Avaliação para adicionar para a mídia
      */
     public void AdicionarAvaliacao(Avaliacao novaAval) {
-        this.Avaliacoes.add(novaAval);
+        if (!novaAval.Avaliador.MidiasAvaliadas.Contem(this.ID)) {
+            this.Avaliacoes.add(novaAval);
+        }
     }
 
     /**
