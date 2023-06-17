@@ -13,4 +13,12 @@ public class AvaliacaoEspecialista extends Avaliacao {
         super(nota, Avaliador);
         this.Descricao = Descricao;
     }
+
+    @Override
+    public String ImprimirAval() {
+
+        return "Nota: " + this.Nota + " Descrição: " + this.Descricao + "\n";
+
+    }
+
 }

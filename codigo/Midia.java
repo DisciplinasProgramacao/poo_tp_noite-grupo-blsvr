@@ -1,5 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
 import Util.Data;
 
@@ -11,7 +10,7 @@ abstract public class Midia {
     Data DataLancamento;
     String ID;
     int visualizacoes;
-    List<Avaliacao> Avaliacoes;
+    HashMap<Cliente, Avaliacao> Avaliacoes;
 
     /**
      * Retorna as informações principais da midia.
@@ -25,19 +24,16 @@ abstract public class Midia {
     }
 
     public Midia() {
-        Avaliacoes = new ArrayList<>();
+        Avaliacoes = new HashMap<Cliente, Avaliacao>();
         DataLancamento = new Data();
     }
 
-    /**
-     * Adiciona uma avaliação para a mídia
-     * 
-     * @param novaAval Avaliação para adicionar para a mídia
-     */
-    public void AdicionarAvaliacao(Avaliacao novaAval) {
-        if (!novaAval.Avaliador.MidiasAvaliadas.Contem(this.ID)) {
-            this.Avaliacoes.add(novaAval);
+    public void AdicionarAvaliacao(Avaliacao Avaliacao) {
+
+        if (!this.Avaliacoes.containsKey(Avaliacao.Avaliador)) {
+            this.Avaliacoes.put(Avaliacao.Avaliador, Avaliacao);
         }
+
     }
 
     /**
@@ -55,7 +51,7 @@ abstract public class Midia {
     public double MediaAvaliacoes() {
         double media = 0;
 
-        for (Avaliacao avaliacao : Avaliacoes) {
+        for (Avaliacao avaliacao : Avaliacoes.values()) {
             media += avaliacao.Nota;
         }
 

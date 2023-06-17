@@ -19,6 +19,11 @@ public class Cliente {
         init(nome, login, senha);
     }
 
+    public boolean podeSerEspecialista() {
+        System.out.println("Você avaliou: " + MidiasAvaliadas.tamanhoLista());
+        return this.MidiasAvaliadas.tamanhoLista() >= QUANTIDADE_PARA_ESPECIALISTA;
+    }
+
     /**
      * Adiciona a midia a lista das midias assistidas
      * 
@@ -37,17 +42,6 @@ public class Cliente {
 
     }
 
-    // /**
-    //  * Transforma o cliente em especialista
-    //  */
-    // public void VirarEspecialista() {
-
-    //     if (this.MidiasAvaliadas.tamanhoLista() >= QUANTIDADE_PARA_ESPECIALISTA) {
-
-    //     }
-
-    // }
-
     /**
      * Adiciona a midia na lista das series planejadas para assistir
      * 
@@ -56,6 +50,18 @@ public class Cliente {
     public void planejarParaAssistir(Midia planejada) {
         if (!MidiasFuturas.Contem(planejada.ID))
             MidiasFuturas.AdicionarMidia(planejada.ID, planejada);
+    }
+
+    public void Avaliar(Midia MidiaAvaliada, int nota, String Descricao) {
+        if (!this.MidiasAvaliadas.Contem(MidiaAvaliada.ID)) {
+            Avaliacao novaAval = new Avaliacao(nota, this);
+            MidiaAvaliada.AdicionarAvaliacao(novaAval);
+            this.MidiasAvaliadas.AdicionarMidia(MidiaAvaliada.ID, MidiaAvaliada);
+        }
+    }
+
+    public String imprimirAvaliacoes() {
+        return this.MidiasAvaliadas.imprimirAvaliacoes(this);
     }
 
 }

@@ -3,19 +3,24 @@ import java.util.HashMap;
 import java.util.List;
 
 public class ListaMidia {
-    private HashMap<String, Midia> listaDeMidias;
+    HashMap<String, Midia> listaDeMidias;
 
     public ListaMidia() {
         listaDeMidias = new HashMap<>();
     }
 
     /**
-     * Imprime os dados de da mídia
+     * Imprime os dados de cada item mídia da lista
      */
-    public void imprimirLista() {
+    public String toString() {
 
-        listaDeMidias.values().stream()
-                .forEach(Midia -> System.out.println("Nome: " + Midia.nome + " Identificação: " + Midia.ID));
+        String retorno = "";
+
+        for (Midia atual : listaDeMidias.values()) {
+            retorno += "\n Nome: " + atual.nome + " || Identificação: " + atual.ID + "\n";
+        }
+
+        return retorno;
 
     }
 
@@ -38,6 +43,7 @@ public class ListaMidia {
 
     /**
      * Retorna o tamanho da lista
+     * 
      * @return número inteiro com o total de itens na lista
      */
     public int tamanhoLista() {
@@ -101,6 +107,21 @@ public class ListaMidia {
      */
     public boolean Contem(String Id) {
         return listaDeMidias.containsKey(Id);
+    }
+
+    public String imprimirAvaliacoes(Cliente avaliador) {
+
+        String retorno = "";
+
+        for (Midia Midia : listaDeMidias.values()) {
+            if (Midia.Avaliacoes.containsKey(avaliador)) {
+                retorno += "\n Mídia: " + Midia.nome + " || Avaliação: "
+                        + Midia.Avaliacoes.get(avaliador).ImprimirAval();
+            }
+
+        }
+
+        return retorno;
     }
 
 }

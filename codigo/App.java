@@ -88,7 +88,8 @@ public class App {
                 System.out.println("2 - Verificar sua lista assistida");
                 System.out.println("3 - Verificar sua lista para assistir");
                 System.out.println("4 - Avaliar uma mídia assistida");
-                System.out.println("5 - Sair da conta");
+                System.out.println("5 - Mostrar suas avaliações");
+                System.out.println("6 - Sair da conta");
 
                 escolha = ler1.nextInt();
 
@@ -181,7 +182,9 @@ public class App {
                         if (!Logado.MidiasAssistidas.isVazia()) {
 
                             System.out.println("As seguintes midias estão em sua lista de assistidas:");
-                            Logado.MidiasAssistidas.imprimirLista();
+
+                            System.out.println(Logado.MidiasAssistidas.toString());
+
                         } else {
                             System.out.println("Sua lista está vazia");
                         }
@@ -194,9 +197,7 @@ public class App {
 
                         if (!Logado.MidiasFuturas.isVazia()) {
                             System.out.println("As seguintes midias estão em sua lista para assistir futuramente:");
-
-                            Logado.MidiasFuturas.imprimirLista();
-
+                            System.out.println(Logado.MidiasFuturas.toString());
                             System.out.println("Caso deseje remover alguma mídia, digite seu código");
                             System.out.println("Caso contrário digite -1");
 
@@ -225,34 +226,50 @@ public class App {
                         if (!Logado.MidiasAssistidas.isVazia()) {
                             System.out
                                     .println("As seguintes mídias estão em sua lista de mídias e podem ser avaliadas:");
-                            Logado.MidiasAssistidas.imprimirLista();
+                            System.out.println(Logado.MidiasAssistidas.toString());
 
-                            System.out.println("\n Digite o código da mídia que deseje avaliar: ");
+                            System.out.println("\n Digite o código da mídia que deseje avaliar: \n");
 
                             try {
                                 escolha = ler1.nextInt();
                             } catch (InputMismatchException e) {
                                 System.out.println("Escolha inválida");
                             }
+                            if (Logado.MidiasAvaliadas.Contem(String.valueOf(escolha))) {
 
-                            if (Logado.MidiasAssistidas.Contem(String.valueOf(escolha))) {
+                                System.out.println("Você já avaliou essa mídia.");
+
+                            } else if (Logado.MidiasAssistidas.Contem(String.valueOf(escolha))) {
 
                                 Midia Analisada = Logado.MidiasAssistidas.Buscar(String.valueOf(escolha));
 
                                 System.out.println(Analisada.toString());
 
-                                System.out
-                                        .println("Digite uma nota de 0 a 5 para " + Analisada.nome);
+                                System.out.println("Digite uma nota de 0 a 5 para " + Analisada.nome);
 
                                 escolha = ler1.nextInt();
 
-                                try {
-                                    Avaliacao novaAvaliacao = new Avaliacao(escolha, Logado);
-                                    System.out.println("Midia Avaliada");
-                                    Analisada.AdicionarAvaliacao(novaAvaliacao);
-
-                                } catch (IllegalArgumentException e) {
-                                    System.out.println(e.getMessage());
+                                if (Logado instanceof ClienteEspecialista) {
+                                    System.out.println("Digite uma descrição para sua avaliação");
+                                    String DescricaoAvaliacao = ler1.nextLine();
+                                    try {
+                                        Logado.Avaliar(Analisada, escolha, DescricaoAvaliacao);
+                                    } catch (IllegalArgumentException e) {
+                                        System.out.println(e.getMessage());
+                                    }
+                                } else {
+                                    try {
+                                        Logado.Avaliar(Analisada, escolha, "");
+                                        System.out.println("Midia Avaliada");
+                                        if (Logado.podeSerEspecialista()) {
+                                            ClienteEspecialista especialista = new ClienteEspecialista(Logado.nome,
+                                                    Logado.login, Logado.senha, Logado.MidiasAssistidas,
+                                                    Logado.MidiasFuturas, Logado.MidiasAvaliadas);
+                                            Logado = especialista;
+                                        }
+                                    } catch (IllegalArgumentException e) {
+                                        System.out.println(e.getMessage());
+                                    }
                                 }
 
                             } else {
@@ -266,8 +283,23 @@ public class App {
                         break;
                     // #endregion
 
-                    // #region Deslogar
                     case 5:
+
+                        if (Logado.MidiasAvaliadas.isVazia()) {
+
+                            System.out.println("Você não possui mídias avaliadas.");
+
+                        } else {
+
+                            System.out.println("Suas avaliações: ");
+
+                            System.out.println(Logado.imprimirAvaliacoes());
+                        }
+
+                        break;
+
+                    // #region Deslogar
+                    case 6:
                         System.out.println("Obrigado por utilizar nosso sistema.");
                         sair = true;
                         logado = false;

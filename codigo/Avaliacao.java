@@ -11,8 +11,13 @@ public class Avaliacao {
     public Avaliacao(int Nota, Cliente Avaliador) {
         if (Nota <= NOTA_MAXIMA && Nota >= 0) {
             this.Nota = Nota;
+            this.Avaliador = Avaliador;
         } else {
             throw new IllegalArgumentException("A nota fornecida está fora do intervalo válido.");
         }
+    }
+
+    public String ImprimirAval() {
+        return "Nota: " + Nota + "\n";
     }
 }

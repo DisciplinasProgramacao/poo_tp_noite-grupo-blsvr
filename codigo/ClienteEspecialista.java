@@ -1,6 +1,10 @@
 public class ClienteEspecialista extends Cliente {
-    public ClienteEspecialista(String nome, String login, String senha) {
+    public ClienteEspecialista(String nome, String login, String senha, ListaMidia midiasAssistidas,
+            ListaMidia midiasFuturas, ListaMidia midiasAvaliadas) {
         super(nome, login, senha);
+        this.MidiasAssistidas = midiasAssistidas;
+        this.MidiasFuturas = midiasFuturas;
+        this.MidiasAvaliadas = midiasAvaliadas;
     }
 
     /**
@@ -13,7 +17,7 @@ public class ClienteEspecialista extends Cliente {
     public void Avaliar(Midia Avaliada, int Nota, String Descricao) {
         if (MidiasAssistidas.Contem(Avaliada.ID)) {
             Avaliacao novaAvaliacao = new AvaliacaoEspecialista(Nota, Descricao, this);
-            Avaliada.Avaliacoes.add(novaAvaliacao);
+            Avaliada.AdicionarAvaliacao(novaAvaliacao);
         }
     }
 }
