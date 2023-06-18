@@ -28,6 +28,11 @@ abstract public class Midia {
         DataLancamento = new Data();
     }
 
+    /**
+     * Adiciona uma avaliação a lista de avaliações do cliente
+     * 
+     * @param Avaliacao Avaliação que será adicionada
+     */
     public void AdicionarAvaliacao(Avaliacao Avaliacao) {
 
         if (!this.Avaliacoes.containsKey(Avaliacao.Avaliador.login)) {

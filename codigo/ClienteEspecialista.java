@@ -10,6 +10,13 @@ public class ClienteEspecialista extends Cliente {
 
     }
 
+    /**
+     * Cria uma cópia de cada lista para que as referências sejam ligadas ao novo
+     * Cliente Especialista
+     * 
+     * @param NovaLista   Lista nova que receberá os valores
+     * @param AntigaLista Lista antiga que dará os valores
+     */
     private void CopiarMidias(ListaMidia NovaLista, ListaMidia AntigaLista) {
 
         for (Midia Analisada : AntigaLista.listaDeMidias.values()) {

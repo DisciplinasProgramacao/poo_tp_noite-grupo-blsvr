@@ -16,7 +16,10 @@ public class Avaliacao {
             throw new IllegalArgumentException("A nota fornecida está fora do intervalo válido.");
         }
     }
-
+/**
+ * Método para imprimir a informações da avaliação
+ * @return String contendo as informações da avaliação
+ */
     public String ImprimirAval() {
         return "Nota: " + Nota + "\n";
     }

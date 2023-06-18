@@ -170,6 +170,4 @@ public class Streaming {
 
     }
 
-    // #endregion
-
 }

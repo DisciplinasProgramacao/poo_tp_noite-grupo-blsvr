@@ -19,6 +19,13 @@ public class Cliente {
         init(nome, login, senha);
     }
 
+    /**
+     * Verifica se o cliente atingiu o necessário para se tornar um Cliente
+     * Especialista
+     * 
+     * @return Verdadeiro caso ele possa ser um cliente especialista, falso caso ele
+     *         não seja um cliente especialista ainda
+     */
     public boolean podeSerEspecialista() {
         return this.MidiasAvaliadas.tamanhoLista() >= QUANTIDADE_PARA_ESPECIALISTA;
     }
@@ -51,6 +58,14 @@ public class Cliente {
             MidiasFuturas.AdicionarMidia(planejada.ID, planejada);
     }
 
+    /**
+     * Faz com que o cliente avalie uma mídia criando uma avaliação normal.
+     * 
+     * @param MidiaAvaliada Mídia que está sendo avaliada
+     * @param nota          Nota que o usuário deu para mídia
+     * @param Descricao     Descrição que o usuário possa ter(Caso ele seja um
+     *                      Cliente normal nenhuma descrição será salva)
+     */
     public void Avaliar(Midia MidiaAvaliada, int nota, String Descricao) {
         if (!this.MidiasAvaliadas.Contem(MidiaAvaliada.ID)) {
             Avaliacao novaAval = new Avaliacao(nota, this);

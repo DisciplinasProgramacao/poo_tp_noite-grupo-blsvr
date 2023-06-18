@@ -109,6 +109,13 @@ public class ListaMidia {
         return listaDeMidias.containsKey(Id);
     }
 
+    /**
+     * Imprime todas as avaliações das mídias contidas nessa lista
+     * 
+     * @param avaliador Avaliador que as avaliações serão pegas
+     * @return Retorna uma String com as informações de todas as avaliações do
+     *         avaliador
+     */
     public String imprimirAvaliacoes(Cliente avaliador) {
 
         String retorno = "";
