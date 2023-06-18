@@ -3,7 +3,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class ListaMidia {
-    HashMap<String, Midia> listaDeMidias;
+    protected HashMap<String, Midia> listaDeMidias;
 
     public ListaMidia() {
         listaDeMidias = new HashMap<>();
@@ -34,6 +34,12 @@ public class ListaMidia {
         return listaDeMidias.size() <= 0 ? true : false;
     }
 
+    /**
+     * Busca uma mídia pelo seu ID diretamente
+     * 
+     * @param ID ID da mídia buscada
+     * @return Retorna a mídia buscada e nulo caso nenhuma mídia seja achada
+     */
     public Midia Buscar(String ID) {
         if (listaDeMidias.containsKey(ID)) {
             return listaDeMidias.get(ID);

@@ -1,7 +1,7 @@
 import Util.Data;
 
 public class Filme extends Midia {
-    String duracaoMinutos;
+    private String duracaoMinutos;
 
     public Filme(String nome, String idioma, String genero, String DataLancamento, String ID, int visualizacoes,
             String duracaoMinutos) {

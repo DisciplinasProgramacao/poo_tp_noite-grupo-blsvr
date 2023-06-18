@@ -7,7 +7,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 public class Streaming {
-    HashMap<String, Cliente> clientesCadastrados;
+    private HashMap<String, Cliente> clientesCadastrados;
     ListaMidia midiasCadastradas;
 
     public Streaming() {

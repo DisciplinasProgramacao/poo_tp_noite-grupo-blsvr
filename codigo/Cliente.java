@@ -3,7 +3,7 @@ public class Cliente {
     ListaMidia MidiasAssistidas;
     ListaMidia MidiasFuturas;
     ListaMidia MidiasAvaliadas;
-    int QUANTIDADE_PARA_ESPECIALISTA = 5;
+    private int QUANTIDADE_PARA_ESPECIALISTA = 5;
 
     private void init(String nome, String login, String senha) {
         this.login = login;
@@ -75,6 +75,11 @@ public class Cliente {
 
     }
 
+    /**
+     * Imprime todas as avaliações desse cliente
+     * 
+     * @return String com todas as informações das avaliações desse cliente
+     */
     public String imprimirAvaliacoes() {
         return this.MidiasAvaliadas.imprimirAvaliacoes(this);
     }

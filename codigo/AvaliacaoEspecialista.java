@@ -1,6 +1,6 @@
 public class AvaliacaoEspecialista extends Avaliacao {
 
-    String Descricao;
+    private String Descricao;
 
     /**
      * Define a avaliação especialista deve conter uma nota de 0 a 5 e uma descrição

@@ -2,7 +2,7 @@ import Util.Data;
 
 public class Serie extends Midia {
 
-    int quantidadeEpisodios;
+    private int quantidadeEpisodios;
 
     // 3489;Yellow County;14/09/2016
 
