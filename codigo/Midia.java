@@ -19,7 +19,7 @@ abstract public class Midia {
      */
     public String toString() {
         String retorno = "\n Nome: " + nome + "\n Quantidade de visualizações: " + visualizacoes
-                + "\n Média de avaliações: " + this.MediaAvaliacoes();
+                + "\n Média de avaliações: " + this.MediaAvaliacoes() + "\n Código de mídia: " + this.ID;
         return retorno;
     }
 

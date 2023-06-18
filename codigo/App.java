@@ -92,7 +92,13 @@ public class App {
                 System.out.println("6 - Módulo de relatórios");
                 System.out.println("7 - Sair da conta");
 
-                escolha = ler1.nextInt();
+                escolha = 10;
+
+                try {
+                    escolha = ler1.nextInt();
+                } catch (InputMismatchException e) {
+                    System.out.println("Escolha inválida");
+                }
 
                 switch (escolha) {
 
@@ -137,7 +143,7 @@ public class App {
                                     try {
                                         escolha = ler1.nextInt();
                                     } catch (InputMismatchException e) {
-                                        System.out.println("Escolha inválida");
+                                        System.out.println("\nEscolha inválida\n");
                                     }
 
                                     switch (escolha) {
@@ -147,7 +153,8 @@ public class App {
                                                 System.out.println("Mídia já está em sua lista");
                                             } else {
                                                 Logado.planejarParaAssistir(midiaSelecionada);
-                                                System.out.println(midiaSelecionada.nome + " planejado para assistir.");
+                                                System.out
+                                                        .println(midiaSelecionada.nome + " planejado para assistir.\n");
                                             }
                                             break;
 
@@ -157,7 +164,8 @@ public class App {
                                             } else {
 
                                                 Logado.assistir(midiaSelecionada);
-                                                System.out.println("Você acabou de assistir " + midiaSelecionada.nome);
+                                                System.out.println(
+                                                        "Você acabou de assistir " + midiaSelecionada.nome + "\n");
                                             }
                                             break;
 
@@ -224,9 +232,18 @@ public class App {
                     // #region Avaliar Midia
                     case 4:
 
-                        if (!Logado.MidiasAssistidas.isVazia()) {
+                        if (!Logado.MidiasAssistidas.isVazia()
+                                && Logado.MidiasAssistidas.tamanhoLista() != Logado.MidiasAvaliadas.tamanhoLista()) {
                             System.out
-                                    .println("As seguintes mídias estão em sua lista de mídias e podem ser avaliadas:");
+                                    .println(
+                                            "As seguintes mídias estão em sua lista de mídias e podem ser avaliadas: \n");
+
+                            String identificarLogado = Logado.login;
+
+                            Logado.MidiasAssistidas.listaDeMidias.values().stream()
+                                    .filter(Midia -> !Midia.Avaliacoes.containsKey(identificarLogado))
+                                    .forEach(Midia -> System.out.println(Midia.toString()));
+
                             System.out.println(Logado.MidiasAssistidas.toString());
 
                             System.out.println("\n Digite o código da mídia que deseje avaliar: \n");
@@ -248,8 +265,11 @@ public class App {
 
                                 System.out.println("Digite uma nota de 0 a 5 para " + Analisada.nome);
 
-                                escolha = ler1.nextInt();
-
+                                try {
+                                    escolha = ler1.nextInt();
+                                } catch (InputMismatchException e) {
+                                    System.out.println("Escolha inválida");
+                                }
                                 if (Logado instanceof ClienteEspecialista) {
                                     System.out.println("Digite uma descrição para sua avaliação");
                                     String DescricaoAvaliacao = ler1.nextLine();
@@ -279,7 +299,7 @@ public class App {
                             }
 
                         } else {
-                            System.out.println("Sua lista está vazia");
+                            System.out.println("Você não possui mídias para avaliar.");
                         }
 
                         break;

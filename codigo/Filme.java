@@ -18,7 +18,8 @@ public class Filme extends Midia {
     @Override
     public String toString() {
         return "Nome: " + nome + "\n Quantidade de visualizações: " + visualizacoes
-                + "\n Média de avaliações: " + this.MediaAvaliacoes() + "\n Duração: " + duracaoMinutos + " minutos";
+                + "\n Média de avaliações: " + this.MediaAvaliacoes() + "\n Duração: " + duracaoMinutos + " minutos"
+                + "\n Código de mídia: " + this.ID;
     }
 
 }
