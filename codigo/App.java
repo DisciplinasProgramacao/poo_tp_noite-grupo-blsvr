@@ -86,7 +86,7 @@ public class App {
 
                 System.out.println("1 - Pesquisar midias cadastradas no sistema");
                 System.out.println("2 - Verificar sua lista assistida");
-                System.out.println("3 - Verificar sua lista para assistir");
+                System.out.println("3 - Verificar sua lista para assistir futuramente");
                 System.out.println("4 - Avaliar uma mídia assistida");
                 System.out.println("5 - Mostrar suas avaliações");
                 System.out.println("6 - Sair da conta");
@@ -130,7 +130,7 @@ public class App {
                                     System.out.println(midiaSelecionada.toString());
 
                                     System.out.println("1 - inserir essa mídia em sua lista para assistir");
-                                    System.out.println("2 - Assistir a série");
+                                    System.out.println("2 - Assistir a mídia");
                                     System.out.println("3 - Sair");
 
                                     try {
