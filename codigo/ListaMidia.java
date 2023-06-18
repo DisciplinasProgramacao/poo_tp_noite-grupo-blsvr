@@ -116,7 +116,7 @@ public class ListaMidia {
     }
 
     /**
-     * Imprime todas as avaliações das mídias contidas nessa lista
+     * Imprime todas as avaliações das mídias contidas nessa lista feitas pelo avaliador
      * 
      * @param avaliador Avaliador que as avaliações serão pegas
      * @return Retorna uma String com as informações de todas as avaliações do

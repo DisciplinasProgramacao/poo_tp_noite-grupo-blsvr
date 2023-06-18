@@ -21,7 +21,8 @@ public class Serie extends Midia {
     @Override
     public String toString() {
         String retorno = "Nome: " + nome + "\n Quantidade de visualizações: " + visualizacoes
-                + "\n Média de avaliações: " + this.MediaAvaliacoes() + "\n Número de episódios: " + quantidadeEpisodios + " episódios";
+                + "\n Média de avaliações: " + this.MediaAvaliacoes() + "\n Número de episódios: " + quantidadeEpisodios
+                + " episódios " + "\n Código de mídia: " + this.ID;
         return retorno;
     }
 
