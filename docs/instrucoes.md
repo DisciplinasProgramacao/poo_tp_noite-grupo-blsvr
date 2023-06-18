@@ -12,24 +12,24 @@ Ao iniciar o programa o usuário pode criar uma conta ou entrar em uma conta já
 
 Ao realizar o login o usuário é apresentado ao menu principal 
 
-                "1 - Pesquisar midias cadastradas no sistema"
-                "2 - Verificar sua lista assistida"
-                "3 - Verificar sua lista para assistir"
-                "4 - Avaliar uma mídia assistida"
-                "5 - Mostrar suas avaliações"
-                "6 - Sair da conta"
+    "1 - Pesquisar midias cadastradas no sistema"
+    "2 - Verificar sua lista assistida"
+    "3 - Verificar sua lista para assistir"
+    "4 - Avaliar uma mídia assistida"
+    "5 - Mostrar suas avaliações"
+    "6 - Sair da conta"
                 
 1-> Realiza uma busca no sistema de acordo com o nome da mídia buscada sendo então apresentada uma lista com todas as mídias que possuem em seu nome o que foi buscado.
   1.1-> Ao apresentar a lista o usuário deve digitar o número de identificação da mídia para realizar ações com ela.
   1.2-> São apresentadas as seguintes opções ao usuário:
   
-                                    "1 - inserir essa mídia em sua lista para assistir"
-                                    "2 - Assistir a série"
-                                    "3 - Sair"
+    "1 - inserir essa mídia em sua lista para assistir"
+    "2 - Assistir a série"
+    "3 - Sair"
                                     
-    1.2.1-> Insere a mídia em sua lista para assistir futuramente
-    1.2.2-> Insere a mídia em sua lista de mídias assistidas
-    1.2.3-> Volta ao menu principal.
+   1.2.1-> Insere a mídia em sua lista para assistir futuramente
+   1.2.2-> Insere a mídia em sua lista de mídias assistidas
+   1.2.3-> Volta ao menu principal.
     
 2-> Imprime toda a sua lista de mídias já assistidas.
 
