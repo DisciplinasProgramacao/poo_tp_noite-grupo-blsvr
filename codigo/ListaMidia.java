@@ -2,10 +2,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class ListaMidia {
+public class ListaMidia implements Comparable<ListaMidia> {
     protected HashMap<String, Midia> listaDeMidias;
 
-    public ListaMidia() {
+    public ListaMidia(){
         listaDeMidias = new HashMap<>();
     }
 
@@ -136,6 +136,11 @@ public class ListaMidia {
         }
 
         return retorno;
+    }
+
+    @Override
+    public int compareTo(ListaMidia o) {
+       return Integer.compare(o.tamanhoLista(), this.tamanhoLista());
     }
 
 }

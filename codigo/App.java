@@ -89,7 +89,8 @@ public class App {
                 System.out.println("3 - Verificar sua lista para assistir futuramente");
                 System.out.println("4 - Avaliar uma mídia assistida");
                 System.out.println("5 - Mostrar suas avaliações");
-                System.out.println("6 - Sair da conta");
+                System.out.println("6 - Módulo de relatórios");
+                System.out.println("7 - Sair da conta");
 
                 escolha = ler1.nextInt();
 
@@ -262,7 +263,7 @@ public class App {
                                     try {
                                         Logado.Avaliar(Analisada, escolha, "");
                                         System.out.println("Midia Avaliada.");
-                                        
+
                                         if (Logado.podeSerEspecialista()) {
                                             ClienteEspecialista especialista = new ClienteEspecialista(Logado);
                                             Logado = especialista;
@@ -300,11 +301,71 @@ public class App {
                         break;
 
                     // #region Deslogar
-                    case 6:
+                    case 7:
                         System.out.println("Obrigado por utilizar nosso sistema.");
                         sair = true;
                         logado = false;
                         break;
+
+                    case 6:
+                        boolean sairMenuRelatório = false;
+                        while (!sairMenuRelatório) {
+                            int opcao;
+                            System.out.println("Bem-vindo ao módulo de relatorios");
+                            System.out.println("Escolha sua ação: ");
+                            System.out.println("1 - Qual cliente assistiu mais mídias, e quantas mídias");
+                            System.out.println("2 - Qual cliente tem mais avaliações, e quantas avaliações");
+                            System.out.println("3 - Qual a porcentagem dos clientes com pelo menos 15 avaliações");
+                            System.out.println(
+                                    "4 - Quais são as 10 mídias com a melhor média de avaliações e que tenham sido vistas pelo menos 100 vezes");
+                            System.out
+                                    .println("5 - Quais são as 10 mídias com mais visualizações");
+                            System.out.println(
+                                    "6 - Quais são as 10 mídias com a melhor média de avaliações e que tenham sido vistas pelo menos 100 vezes, separados por gênero");
+                            System.out
+                                    .println("7 - Quais são as 10 mídias com mais visualizações, separados por gênero");
+                            System.out
+                                    .println("8 - Sair do módulo de relatórios");
+
+                            opcao = ler1.nextInt();
+                            switch (opcao) {
+                                case 1:
+
+                                    Cliente clienteMax = sesao.clientesCadastrados.values().stream().max(
+                                            (o1, o2) -> o1.MidiasAssistidas.compareTo(o2.MidiasAssistidas)).get();
+                                    System.out.println("Cliente que assistiu mais midias " + clienteMax.nome
+                                            + " Assistiu: " + clienteMax.MidiasAssistidas.tamanhoLista() + " midias");
+                                    break;
+                                case 2:
+                                    Cliente maisAvaliacoes = sesao.clientesCadastrados.values().stream().max(
+                                            (o1, o2) -> o1.MidiasAvaliadas.compareTo(o2.MidiasAvaliadas)).get();
+                                    System.out.println(
+                                            "Cliente que assistiu mais midias " + maisAvaliacoes.nome + " Assistiu: "
+                                                    + maisAvaliacoes.MidiasAvaliadas.tamanhoLista() + " midias");
+                                    break;
+                                case 3:
+                                    long clientesComQuinzeAvaliacoes = sesao.clientesCadastrados.values().stream()
+                                            .filter(cliente -> cliente.MidiasAvaliadas.tamanhoLista() >= 15).count();
+                                    long todosClientes = sesao.clientesCadastrados.size();
+                                    long porcentagem = (clientesComQuinzeAvaliacoes * 100) / todosClientes;
+                                    System.out.println(
+                                            "Porcentagem de clientes com pelo menos 15 avaliações: " + porcentagem);
+                                    break;
+                                case 4:
+                                    break;
+                                case 5:
+                                    break;
+                                case 6:
+                                    break;
+                                case 7:
+                                    break;
+                                default:
+                                    sairMenuRelatório = true;
+                                    break;
+                            }
+                        }
+                        break;
+
                     // #endregion
 
                 }
