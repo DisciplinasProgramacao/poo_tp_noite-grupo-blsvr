@@ -16,9 +16,7 @@ public class AvaliacaoEspecialista extends Avaliacao {
 
     @Override
     public String ImprimirAval() {
-
         return "Nota: " + this.Nota + " Descrição: " + this.Descricao + "\n";
-
     }
 
 }

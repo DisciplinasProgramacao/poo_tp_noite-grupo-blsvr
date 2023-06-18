@@ -20,7 +20,6 @@ public class Cliente {
     }
 
     public boolean podeSerEspecialista() {
-        System.out.println("Você avaliou: " + MidiasAvaliadas.tamanhoLista());
         return this.MidiasAvaliadas.tamanhoLista() >= QUANTIDADE_PARA_ESPECIALISTA;
     }
 
@@ -58,6 +57,7 @@ public class Cliente {
             MidiaAvaliada.AdicionarAvaliacao(novaAval);
             this.MidiasAvaliadas.AdicionarMidia(MidiaAvaliada.ID, MidiaAvaliada);
         }
+
     }
 
     public String imprimirAvaliacoes() {

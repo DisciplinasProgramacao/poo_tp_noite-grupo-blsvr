@@ -10,7 +10,7 @@ abstract public class Midia {
     Data DataLancamento;
     String ID;
     int visualizacoes;
-    HashMap<Cliente, Avaliacao> Avaliacoes;
+    HashMap<String, Avaliacao> Avaliacoes;
 
     /**
      * Retorna as informações principais da midia.
@@ -24,14 +24,14 @@ abstract public class Midia {
     }
 
     public Midia() {
-        Avaliacoes = new HashMap<Cliente, Avaliacao>();
+        Avaliacoes = new HashMap<String, Avaliacao>();
         DataLancamento = new Data();
     }
 
     public void AdicionarAvaliacao(Avaliacao Avaliacao) {
 
-        if (!this.Avaliacoes.containsKey(Avaliacao.Avaliador)) {
-            this.Avaliacoes.put(Avaliacao.Avaliador, Avaliacao);
+        if (!this.Avaliacoes.containsKey(Avaliacao.Avaliador.login)) {
+            this.Avaliacoes.put(Avaliacao.Avaliador.login, Avaliacao);
         }
 
     }

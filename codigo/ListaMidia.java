@@ -114,9 +114,10 @@ public class ListaMidia {
         String retorno = "";
 
         for (Midia Midia : listaDeMidias.values()) {
-            if (Midia.Avaliacoes.containsKey(avaliador)) {
+
+            if (Midia.Avaliacoes.containsKey(avaliador.login)) {
                 retorno += "\n Mídia: " + Midia.nome + " || Avaliação: "
-                        + Midia.Avaliacoes.get(avaliador).ImprimirAval();
+                        + Midia.Avaliacoes.get(avaliador.login).ImprimirAval();
             }
 
         }

@@ -62,7 +62,7 @@ public class App {
                             sesao.cadastrar(login, senha, nome);
 
                         } catch (Exception e) {
-                            System.out.println(e.toString());
+                            System.out.println(e.getMessage());
                         }
 
                         break;
@@ -252,6 +252,7 @@ public class App {
                                 if (Logado instanceof ClienteEspecialista) {
                                     System.out.println("Digite uma descrição para sua avaliação");
                                     String DescricaoAvaliacao = ler1.nextLine();
+                                    DescricaoAvaliacao = ler1.nextLine(); // Duplicado para não pular a leitura
                                     try {
                                         Logado.Avaliar(Analisada, escolha, DescricaoAvaliacao);
                                     } catch (IllegalArgumentException e) {
@@ -260,12 +261,12 @@ public class App {
                                 } else {
                                     try {
                                         Logado.Avaliar(Analisada, escolha, "");
-                                        System.out.println("Midia Avaliada");
+                                        System.out.println("Midia Avaliada.");
+                                        
                                         if (Logado.podeSerEspecialista()) {
-                                            ClienteEspecialista especialista = new ClienteEspecialista(Logado.nome,
-                                                    Logado.login, Logado.senha, Logado.MidiasAssistidas,
-                                                    Logado.MidiasFuturas, Logado.MidiasAvaliadas);
+                                            ClienteEspecialista especialista = new ClienteEspecialista(Logado);
                                             Logado = especialista;
+                                            System.out.println("Parabéns, você agora é um cliente especialista.");
                                         }
                                     } catch (IllegalArgumentException e) {
                                         System.out.println(e.getMessage());

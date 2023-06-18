@@ -1,10 +1,21 @@
 public class ClienteEspecialista extends Cliente {
-    public ClienteEspecialista(String nome, String login, String senha, ListaMidia midiasAssistidas,
-            ListaMidia midiasFuturas, ListaMidia midiasAvaliadas) {
-        super(nome, login, senha);
-        this.MidiasAssistidas = midiasAssistidas;
-        this.MidiasFuturas = midiasFuturas;
-        this.MidiasAvaliadas = midiasAvaliadas;
+
+    public ClienteEspecialista(Cliente clienteNormal) {
+
+        super(clienteNormal.nome, clienteNormal.login, clienteNormal.senha);
+
+        CopiarMidias(this.MidiasAvaliadas, clienteNormal.MidiasAvaliadas);
+        CopiarMidias(this.MidiasAssistidas, clienteNormal.MidiasAssistidas);
+        CopiarMidias(this.MidiasFuturas, clienteNormal.MidiasFuturas);
+
+    }
+
+    private void CopiarMidias(ListaMidia NovaLista, ListaMidia AntigaLista) {
+
+        for (Midia Analisada : AntigaLista.listaDeMidias.values()) {
+            NovaLista.listaDeMidias.put(Analisada.ID, Analisada);
+        }
+
     }
 
     /**
@@ -15,9 +26,12 @@ public class ClienteEspecialista extends Cliente {
      * @param Descricao Descrição da avaliação dada pelo especialista
      */
     public void Avaliar(Midia Avaliada, int Nota, String Descricao) {
-        if (MidiasAssistidas.Contem(Avaliada.ID)) {
-            Avaliacao novaAvaliacao = new AvaliacaoEspecialista(Nota, Descricao, this);
+        if (MidiasAssistidas.Contem(Avaliada.ID) && !MidiasAvaliadas.Contem(Avaliada.ID)) {
+            AvaliacaoEspecialista novaAvaliacao = new AvaliacaoEspecialista(Nota, Descricao, this);
             Avaliada.AdicionarAvaliacao(novaAvaliacao);
+            MidiasAvaliadas.AdicionarMidia(Avaliada.ID, Avaliada);
+
         }
     }
+
 }
