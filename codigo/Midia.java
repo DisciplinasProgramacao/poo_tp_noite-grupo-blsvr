@@ -48,6 +48,14 @@ abstract public class Midia {
         this.visualizacoes++;
     }
 
+    public int getViews() {
+        return this.visualizacoes;
+    }
+
+    public String getGenero() {
+        return this.genero;
+    }
+
     /**
      * Calcula a média de todas as avaliações presentes na mídia
      * 

@@ -14,6 +14,8 @@ public class App {
         boolean fechar = false;
         // #endregion
 
+        String[] Generos = { "Terror", "Comédia", "Ação" };
+
         while (!fechar) {
 
             // #region LOGIN / CADASTRO
@@ -348,36 +350,46 @@ public class App {
                                     .println("8 - Sair do módulo de relatórios");
 
                             opcao = ler1.nextInt();
+
                             switch (opcao) {
                                 case 1:
 
-                                    Cliente clienteMax = sesao.clientesCadastrados.values().stream().max(
-                                            (o1, o2) -> o1.MidiasAssistidas.compareTo(o2.MidiasAssistidas)).get();
-                                    System.out.println("Cliente que assistiu mais midias " + clienteMax.nome
-                                            + " Assistiu: " + clienteMax.MidiasAssistidas.tamanhoLista() + " midias");
+                                    System.out.println(sesao.clienteComMaisMidiasVistas());
+
                                     break;
                                 case 2:
-                                    Cliente maisAvaliacoes = sesao.clientesCadastrados.values().stream().max(
-                                            (o1, o2) -> o1.MidiasAvaliadas.compareTo(o2.MidiasAvaliadas)).get();
-                                    System.out.println(
-                                            "Cliente que assistiu mais midias " + maisAvaliacoes.nome + " Assistiu: "
-                                                    + maisAvaliacoes.MidiasAvaliadas.tamanhoLista() + " midias");
+
+                                    System.out.println(sesao.clienteComMaisAvaliacoes());
+
                                     break;
                                 case 3:
-                                    long clientesComQuinzeAvaliacoes = sesao.clientesCadastrados.values().stream()
-                                            .filter(cliente -> cliente.MidiasAvaliadas.tamanhoLista() >= 15).count();
-                                    long todosClientes = sesao.clientesCadastrados.size();
-                                    long porcentagem = (clientesComQuinzeAvaliacoes * 100) / todosClientes;
-                                    System.out.println(
-                                            "Porcentagem de clientes com pelo menos 15 avaliações: " + porcentagem);
+
+                                    System.out.println(sesao.porcentagemClientes15Aval());
+
                                     break;
                                 case 4:
+
+                                    System.out.println(sesao.Top10Midias());
+
                                     break;
                                 case 5:
+
+                                    System.out.println(sesao.midiasComMaisViews());
+
                                     break;
                                 case 6:
+
+                                    for (String generoAtual : Generos) {
+                                        System.out.println(sesao.midiascomMelhorAvaliacoesPorGenero(generoAtual));
+                                    }
+
                                     break;
                                 case 7:
+
+                                    for (String generoAtual : Generos) {
+                                        System.out.println(sesao.maisVistasPorGenero(generoAtual));
+                                    }
+
                                     break;
                                 default:
                                     sairMenuRelatório = true;
