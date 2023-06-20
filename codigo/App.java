@@ -1,9 +1,10 @@
+import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
 public class App {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         // #region PREENCHIMENTO DO SISTEMA
         Streaming sesao = new Streaming();
@@ -350,7 +351,7 @@ public class App {
                             opcao = ler1.nextInt();
                             switch (opcao) {
                                 case 1:
-
+                              
                                     Cliente clienteMax = sesao.clientesCadastrados.values().stream().max(
                                             (o1, o2) -> o1.MidiasAssistidas.compareTo(o2.MidiasAssistidas)).get();
                                     System.out.println("Cliente que assistiu mais midias " + clienteMax.nome
@@ -360,7 +361,7 @@ public class App {
                                     Cliente maisAvaliacoes = sesao.clientesCadastrados.values().stream().max(
                                             (o1, o2) -> o1.MidiasAvaliadas.compareTo(o2.MidiasAvaliadas)).get();
                                     System.out.println(
-                                            "Cliente que assistiu mais midias " + maisAvaliacoes.nome + " Assistiu: "
+                                            "Cliente com mais avaliações " + maisAvaliacoes.nome + " Avaliou: "
                                                     + maisAvaliacoes.MidiasAvaliadas.tamanhoLista() + " midias");
                                     break;
                                 case 3:
@@ -369,15 +370,19 @@ public class App {
                                     long todosClientes = sesao.clientesCadastrados.size();
                                     long porcentagem = (clientesComQuinzeAvaliacoes * 100) / todosClientes;
                                     System.out.println(
-                                            "Porcentagem de clientes com pelo menos 15 avaliações: " + porcentagem);
+                                            "Porcentagem de clientes com pelo menos 15 avaliações: " + porcentagem+"%");
                                     break;
                                 case 4:
+                                System.out.println("A ser implementado");
                                     break;
                                 case 5:
+                                System.out.println("A ser implementado");
                                     break;
                                 case 6:
+                                System.out.println("A ser implementado");
                                     break;
                                 case 7:
+                                System.out.println("A ser implementado");
                                     break;
                                 default:
                                     sairMenuRelatório = true;
@@ -396,4 +401,7 @@ public class App {
         ler1.close();
 
     }
+
+  
+
 }
