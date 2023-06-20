@@ -1,0 +1,195 @@
+<Project>
+  <Name>POO</Name>
+  <ProjectItem type="NClass.DiagramEditor.ClassDiagram.Diagram" assembly="NClass.DiagramEditor, Version=2.4.1823.0, Culture=neutral, PublicKeyToken=null">
+    <Name>Modelo</Name>
+    <Language>CSharp</Language>
+    <Entities>
+      <Entity type="Class">
+        <Name>Streaming</Name>
+        <Access>Public</Access>
+        <Location left="358" top="126" />
+        <Size width="519" height="349" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">HashMap&lt;String, Cliente&gt; clientesCadastrados</Member>
+        <Member type="Field">ListaMidia seriesCadastradas</Member>
+        <Member type="Method">public void entrar()</Member>
+        <Member type="Method">public boolean Confirmar(String Login, String Senha)</Member>
+        <Member type="Method">public void Cadastrar(String Login, String Senha, String Nome)</Member>
+        <Member type="Method">public void cadastrarVariosUsuarios(String CaminhoArquivo)</Member>
+        <Member type="Method">public void cadastrarVariasMidias(String CaminhoArquivo)</Member>
+        <Member type="Method">public void cadastrarAudiencia(String CaminhoArquivo)</Member>
+        <Member type="Method">public String Top10Midias()</Member>
+        <Member type="Method">public String porcentagemClientes15Aval()</Member>
+        <Member type="Method">public String clienteComMaisAvaliacoes()</Member>
+        <Member type="Method">public String clienteComMaisMidiasVistas()</Member>
+        <Member type="Method">public String midiasComMaisViews()</Member>
+        <Member type="Method">private List&lt;Midia&gt; separarMidiaPorGenero(Function&lt;Midia, x&gt; metodoDeSeparacao, String Genero)</Member>
+        <Member type="Method">public String midiascomMelhorAvaliacoesPorGenero(String Genero)</Member>
+        <Member type="Method">public String maisVistasPorGenero(String Genero)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>ListaMidia</Name>
+        <Access>Public</Access>
+        <Location left="869" top="533" />
+        <Size width="356" height="162" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">protected HashMap&lt;String,Midia&gt; ListaDeMidias</Member>
+        <Member type="Method">public boolean Contem(Midia Pesquisada)</Member>
+        <Member type="Method">public ListaMidia Buscar(String Nome, String Idioma, String Genero)</Member>
+        <Member type="Method">public void AdicionarMidia(Midia Adicionada)</Member>
+        <Member type="Method">public void RemoverMidia(Midia Removida)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Midia</Name>
+        <Access>Public</Access>
+        <Location left="545" top="597" />
+        <Size width="264" height="264" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">String nome</Member>
+        <Member type="Field">String idioma</Member>
+        <Member type="Field">String genero</Member>
+        <Member type="Field">Data DataLancamento</Member>
+        <Member type="Field">String id</Member>
+        <Member type="Field">int visualizacoes</Member>
+        <Member type="Field">HashMap&lt;String, Avaliacao&gt; Avaliacoes</Member>
+        <Member type="Method">public void AdicionarView()</Member>
+        <Member type="Method">public double MediaAvaliacoes()</Member>
+        <Member type="Method">public void toString()</Member>
+        <Member type="Method">public void AdicionarAvaliacao(Avaliacao Avaliacao)</Member>
+        <Modifier>Abstract</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Serie</Name>
+        <Access>Public</Access>
+        <Location left="746" top="943" />
+        <Size width="162" height="111" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">int quantidadeEpisodios</Member>
+        <Member type="Method">public String toString()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Filme</Name>
+        <Access>Public</Access>
+        <Location left="458" top="943" />
+        <Size width="162" height="111" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">int duracaoMinutos</Member>
+        <Member type="Method">public String toString()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Cliente</Name>
+        <Access>Public</Access>
+        <Location left="1067" top="161" />
+        <Size width="382" height="315" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">String Login</Member>
+        <Member type="Field">String Senha</Member>
+        <Member type="Field">String Nome</Member>
+        <Member type="Field">ListaMidia MidiasAssistidas</Member>
+        <Member type="Field">ListaMidia MidiasFuturas</Member>
+        <Member type="Field">ListMidia MidiasAvaliadas</Member>
+        <Member type="Field">static int QUANTIDADE_PARA_ESPECIALISTA = 5</Member>
+        <Member type="Method">public void Assistir(Midia Assistida)</Member>
+        <Member type="Method">public void PlanejarAssistir(Midia Assistida)</Member>
+        <Member type="Method">public void RemoverPlanejadas(Midia Removida)</Member>
+        <Member type="Method">public String ImprimirAvaliacoes()</Member>
+        <Member type="Method">public boolean Contem(String id)</Member>
+        <Member type="Method">public Midia Buscar(String nome, String idioma, String genero, String id)</Member>
+        <Member type="Method">public boolean podeSerEspecialista()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Avaliacao</Name>
+        <Access>Public</Access>
+        <Location left="957" top="771" />
+        <Size width="243" height="145" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">int Nota</Member>
+        <Member type="Field">int NOTA_MAXIMA = 5</Member>
+        <Member type="Field">Cliente Avaliador</Member>
+        <Member type="Method">public String ImprimirAval()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>AvaliacaoEspecialista</Name>
+        <Access>Public</Access>
+        <Location left="1350" top="760" />
+        <Size width="180" height="111" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">String Descricao</Member>
+        <Member type="Method">public String ImprimirAval()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>ClienteEspecialista</Name>
+        <Access>Public</Access>
+        <Location left="1294" top="553" />
+        <Size width="358" height="111" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">public void Avaliar(Midia Avaliada, int Nota, String Descricao)</Member>
+        <Member type="Method">private void CopiarMidias(ListaMidia NovaLista, ListaMidia AntigaLiesta)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+    </Entities>
+    <Relationships>
+      <Relationship type="Generalization" first="3" second="2">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="4" second="2">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Association" first="0" second="1">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Bidirectional</Direction>
+        <AssociationType>Aggregation</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="1" second="2">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <Direction>Bidirectional</Direction>
+        <AssociationType>Composition</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="0" second="5">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <Direction>Bidirectional</Direction>
+        <AssociationType>Composition</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="5" second="1">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Bidirectional</Direction>
+        <AssociationType>Composition</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="2" second="6">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <Direction>Bidirectional</Direction>
+        <AssociationType>Composition</AssociationType>
+      </Relationship>
+      <Relationship type="Generalization" first="7" second="6">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="8" second="5">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1471</X>
+          <Y>528</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>1391</X>
+          <Y>501</Y>
+        </BendPoint>
+      </Relationship>
+    </Relationships>
+  </ProjectItem>
+</Project>
